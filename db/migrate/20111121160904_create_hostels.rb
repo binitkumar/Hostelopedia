@@ -3,7 +3,7 @@ class CreateHostels < ActiveRecord::Migration
     create_table :hostels do |t|
       t.string :name
       t.string :contact_person
-      t.contact_no :
+      t.string :contact_no
 
       t.timestamps
     end
