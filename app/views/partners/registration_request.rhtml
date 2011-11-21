@@ -1,0 +1,65 @@
+<h1>Hostel Registration Page</h1>
+<table class=container style="width:400px">
+<tr><td colspan=4 class=header_info>Hostel Details</td></tr>
+<form action='/partner/new_registration' method=post >
+	<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" >
+	<tr>
+		<td class=column_info>Hostel Name :</td>
+		<td colspan=3><input type=text name=hostel_name  /></td>
+	</tr>
+	<tr>
+		<td class=column_info>Contact Person :</td>
+		<td colspan=3><input type=text name=contact_person  /></td>
+	</tr>
+	<tr>
+		<td class=column_info>Contact No :</td>
+		<td colspan=3><input type=text name=contact_no  /></td>
+	</tr>
+	<tr>
+		<td class=column_info>Landmark :</td>
+		<td colspan=3><input type=text name=landmark  /></td>
+	</tr>
+	<tr>
+		<td class=column_info>Address Line 1 :</td>
+		<td colspan=3><input type=text name=address_line_one  /></td>
+	</tr>
+	<tr>
+		<td class=column_info>Street :</td>
+		<td colspan=3><input type=text name=street  /></td>
+	</tr>
+	<tr>
+		<td class=column_info>City :</td>
+		<td colspan=3>
+			<select name=city>
+				<option value=Hyderabad>Hyderabad</option>
+				<option value=Chennai>Chennai</option>
+				<option value=Bengaluru>Bengaluru</option>
+				<option value=Mumbai>Mumbai</option>
+				<option value=Delhi>Delhi</option>
+				<option value=Kolkata>Kolkata</option>
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td class=column_info>PIN Code :</td>
+		<td colspan=3><input type=text name=pin_code  /></td>
+	</tr>
+	<tr>
+		<td class=column_info>Food :</td>
+		<td colspan=3>
+			<select name=food_service>
+				<option value='Available'>Available</option>
+				<option value='Not Available'>Not Available</option>
+				<option value='Mendetory'>Mendetory</option>
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td class=column_info>Additional Notes</td>
+		<td colspan=3><textarea name=additional_notes rows=3 cols=20></textarea></td>
+	</tr>
+	<tr>
+		<td colspan=4 align=center><input type=submit value="Register" class=submitter /></td>
+	</tr>
+</form>
+</table>

@@ -1,0 +1,42 @@
+<h1> Reminder Notes</h1>
+<table class=container>
+	<form action='/reminder/add_reminder' method=post onSubmit="return validateForm();">
+	<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" >
+	<tr>
+		<td>Reminder Details</td>
+		<td colspan=2><textarea name=reminder_note class="validate[required] text-input" ></textarea>
+	</tr>
+	<tr>
+		<td>Reminder For Date :</td>
+		<td colspan=2><input type=text name=reminder_date id=reminder_date readonly="readonly"/></td>
+	</tr>
+	<tr><td colspan=3 align=center><input type=Submit value="Add Reminder"  class='submitter'/></td></tr>
+	</form>
+	<tr><td class=header_info>Date</td><td class=header_info>Note</td><td class=header_info>Action</td></tr>
+	<% row_count = 0 %>
+	<% @random_rmd.each do |rmd| %>
+	<% row_count += 1%>
+	<tr><td><%= rmd.for_date.strftime('%d/%m/%y') if !rmd.for_date.nil? %></td><td><%= rmd.note%></td><td><a class=detail_link onClick="return confirm('Are you sure you want to delete.');" class=active href='/reminder/delete/<%=rmd.id%>'>Delete</a></td></tr>
+	<% end %>
+	<% if row_count==0 %>
+		<tr><td colspan=3 style="text-align:center" class=column_info >No records found.</td></tr>
+	<% end %>
+</table>
+<script language=javascript>
+$().ready(function(){
+	$('#reminder_date').datePicker();
+});
+function validateForm(){
+	note = $(".text-input").val();
+	if (note.length ==0){ 
+		alert("Note is blank.");
+		return false
+	}
+	date = $("#reminder_date").val();
+	if (date.length ==0){ 
+		alert("Please specify the date.");
+		return false
+	}
+	return true;
+}
+</script>

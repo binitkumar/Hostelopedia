@@ -1,0 +1,41 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>Add New Building</TITLE>
+</HEAD>
+
+<BODY>
+<h1> Add New Building</h1>
+<table>
+	<tr>
+		<td colspan=2 align=center class=header_info>New Bulding Details</td>
+	</tr>
+      <%= form_for @building do |f| %>
+	<%= f.label :name 'Name' %>:
+	<%= f.text_field :name %><br>
+	<%= f.label :address 'Address' %>:
+	<%= f.text_area :address %><br>
+	<%= f.label :security_guard 'Security Guard'%>
+	<%= f.text_field :security_guard %>
+	<%= f.submit %>
+      <% end %>
+      %>
+	<!-- form action='/building/add_building' method=post>
+	<tr>
+		<td>Name</td>
+		<td><input type=text name=building_name />
+	</tr>
+	<tr>
+		<td>Address</td>
+		<td><textarea name=building_address></textarea></td>
+	</tr>
+	<tr>
+		<td>Security Guard</td>
+		<td><input type=text name=building_security_guard /></td>
+		<input type=hidden name=owner_id value= <%= current_user['id'] %> >
+	</tr>
+	<tr><td colspan=2 align=center><input type=Submit value="Add Bulding" />
+	</form -->
+</table>
+</BODY>
+</HTML>

@@ -1,0 +1,4 @@
+class Transection < ActiveRecord::Base
+
+attr_accessiable :created_at
+end

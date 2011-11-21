@@ -1,0 +1,112 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>Hostelopedia</title>
+  
+  <%= stylesheet_link_tag "datePicker" %>
+  <%= javascript_include_tag :defaults %>
+  <%= javascript_include_tag "jquery" %>
+  <%= javascript_include_tag "date" %>
+  <%= javascript_include_tag "datePicker" %>
+  <%= javascript_include_tag "validater" %>
+  <%= yield :head %>
+  <%= stylesheet_link_tag "style" %>
+</head>
+
+<body>
+  <div id="main">
+    <div id="header">
+      <div id="logo">
+        <div id="logo_text">
+	<% unless user_signed_in? -%>
+		 <li style="text-align:right"><%= link_to "Sign in", new_user_session_path,:class=>'logout' %></li><br>
+		 <li style="text-align:right"><%#= link_to "New user sign up", '/users/sign_up' ,:class=>'logout' %></li>
+	<% else -%>
+		<li align=right><%= link_to "Sign out", destroy_user_session_path, :method => :delete , :class=>'logout' %></li>
+	<% end -%>
+
+          <!-- class="logo_colour", allows you to change the colour of the text -->
+          <h1><a href="#">Hostelopedia<span class="logo_colour">Hostel Services</span></a></h1>
+          <h2>With you, always.</h2>
+        </div>
+      </div>
+    </div>
+    <div id="site_content">
+      <div id="sidebar_container">
+	  	<div class="sidebar">
+          <div class="sidebar_top"></div>
+          <div class="sidebar_item">
+            <h3>Search Hostel</h3>
+			<hr><br>
+			<form action="#" method=post>
+			City :&nbsp;&nbsp;&nbsp;<select name=city>
+				<option value='Hyderabad'>Hyderabad</option>
+				<option value='Chennai'>Chennai</option>
+				<option value='Mumbai'>Mumbai</option>
+				<option value='Bangalore'>Bangalore</option>
+				<option value='Kolkata'>Kolkata</option>
+				<option value='Delhi'>Delhi</option>
+			</select><br><br>
+			Area : &nbsp;&nbsp;&nbsp;<select name=area>
+				<option value=xxx>XXX</option>
+				<option value=xxx>XXX</option>
+				<option value=xxx>XXX</option>
+				<option value=xxx>XXX</option>
+			</select><br><br>
+			<input type=submit value=Search class=submitter><a href="#">Advanced search</a>
+			</form>
+          </div>
+          <div class="sidebar_base"></div>
+        </div>
+        <div class="sidebar">
+          <div class="sidebar_top"></div>
+          <div class="sidebar_item">
+            <!-- insert your sidebar items here -->
+            <h3>Hostelopedia Updates</h3>
+			<hr><br>
+			<ul>
+				<li><a href='#'>Today's Reminder</a></li>
+				<li><a href='#'>Vacancy Search</a></li>
+				<li><a href='#'>Reminder Notes</a></li>
+			</ul>
+          </div>
+          <div class="sidebar_base"></div>
+        </div>
+
+	<div class="sidebar">
+          <div class="sidebar_top"></div>
+          <div class="sidebar_item">
+            <!-- insert your sidebar items here -->
+            <h3>Other Services</h3>
+			<hr><br>
+			<ul>
+				<li><a href='#'>Career Caunselling</a></li>
+				<li><a href='#'>Resume Building</a></li>
+				<li><a href='#'>Coching Search</a></li>
+			</ul>
+          </div>
+          <div class="sidebar_base"></div>
+        </div>
+      </div>
+      <div id="content">
+      <div class=container style="text-align:center">
+        <%= yield -%>
+      </div>
+      </div>
+    </div>
+    <div id="footer">
+	<%= yield :scripts %> 
+      <p>Copyright &copy; TELM </p>
+    </div>
+    <p>&nbsp;</p>
+  </div>
+</body>
+</html>
+<script language=javascript>
+jQuery('#building_selector').change(function(){
+	value = jQuery('#building_selector').val();
+	if (value != 0){
+		jQuery('#quick_navigator').submit();
+	}
+});
+</script>

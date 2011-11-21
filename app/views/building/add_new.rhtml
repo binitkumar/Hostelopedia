@@ -1,0 +1,34 @@
+<h1> Add New Building</h1>
+<table class=container>
+	<form action='/building/add' method=post onSubmit="return validateForm();" >
+	<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" >
+	<tr>
+		<td class=column_info>Name</td>
+		<td><input type=text name=building_name id=building_name />
+	</tr>
+	<tr>
+		<td class=column_info>Address</td>
+		<td><textarea name=building_address id=address ></textarea></td>
+	</tr>
+	<tr>
+		<td class=column_info>Security Guard</td>
+		<td><input type=text name=building_security_guard /></td>
+	</tr>
+	<tr><td colspan=2 align=center><input type=submit value="Add Bulding" class=submitter /></td></tr>
+	</form>
+</table> 
+<script language=javascript>
+function validateForm(){
+	note = $("#building_name").val();
+	if (! validateNotEmpty(note) ){ 
+		alert("Building name is blank.");
+		return false;
+	};
+	note = $("#address").val();
+	if (! validateNotEmpty(note) ){ 
+		alert("Building Address is blank.");
+		return false;
+	};
+	return true;
+}
+</script>

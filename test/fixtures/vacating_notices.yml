@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  student_id: 1
+  roomt_id: 1
+  exit_date: 2011-10-22
+
+two:
+  student_id: 1
+  roomt_id: 1
+  exit_date: 2011-10-22

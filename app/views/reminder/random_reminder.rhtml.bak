@@ -1,0 +1,46 @@
+<h1> Reminder Notes</h1>
+<table class=container>
+	<form action='/reminder/add_reminder' method=post>
+	<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" >
+	<tr>
+		<td>Reminder Details</td>
+		<td colspan=2><textarea name=note ></textarea>
+	</tr>
+	<tr>
+		<td>Reminder For Date :</td>
+		<td colspan=2> 
+		Day :&nbsp;&nbsp;&nbsp;&nbsp;<select name=day>
+			<% for id in 1..31%>
+				<option value=<%=id%> ><%= id%></option>
+			<% end %>
+			</select><br>
+			Month :<select id=rent_month name=month1>
+			<option value=January>January</option>
+			<option value=Febuary>Febuary</option>
+			<option value=March>March</option>
+			<option value=April>April</option>
+			<option value=May>May</option>
+			<option value=June>June</option>
+			<option value=July>July</option>
+			<option value=August>August</option>
+			<option value=September>September</option>
+			<option value=October>October</option>
+			<option value=November>November</option>
+			<option value=December>December</option>
+			</select><br>
+
+			Year :&nbsp;&nbsp;
+			<select name=year>
+			<% for id in 2011..2015%>
+				<option value=<%=id%> ><%= id%></option>
+			<% end %>
+			</select>
+		</td>
+	</tr>
+	<tr><td colspan=3 align=center><input type=Submit value="Add Reminder" />
+	</form>
+	<tr><td class=header_info>Date</td><td class=header_info>Note</td><td>Action</td></tr>
+	<% @random_rmd.each do |rmd| %>
+	<tr><td><%= rmd.for_date.strftime('%d/%m/%y')%></td><td><%= rmd.note%></td><td><a href='/reminder/delete/<%=rmd.id%>'>Delete</a></td></tr>
+	<% end %>
+</table>

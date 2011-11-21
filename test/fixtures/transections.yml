@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  rent_month: MyString
+  details: MyString
+  amount: 1
+
+two:
+  rent_month: MyString
+  details: MyString
+  amount: 1

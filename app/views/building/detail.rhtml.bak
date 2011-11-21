@@ -1,0 +1,26 @@
+<table class=container>
+<tr><td colspan=2  class=header_info><%= @building.name %></td></tr>
+<tr><td>Total Seates :</td><td align=left ><%= @total %></td></tr>
+<tr><td>Occupied :</td><td align=left ><%= @current_count %></td></tr>
+<tr><td colspan=2  class=header_info>Status</td></tr>
+<% @floor.each do | floor |%>
+<tr><td colspan=2  class=header_info><%= floor.name %></td></tr>
+<tr><td colspan=2 align=center>
+							<table><tr>
+							<% floor.rooms.each do |room|%>
+								<td><table>
+								<tr><td class=subheader><%= link_to("#{room.name}", "/roomdetail/search_result/#{room.id}") %>	</td></tr>
+								<% room.beds.each do |bed| %>
+									<% if bed.students.length == 0 %>
+									
+										<tr><td class=vacant><%= link_to('Vacant',"/studentdetail/add_new/#{bed.id}") %></td></tr>
+									<% else %>
+										<tr><td><%= link_to("#{bed.students[0].name}","/studentdetail/detail/#{bed.students[0].id}") %></td></tr>
+									<% end %>
+								<% end%>
+								</table></td>
+							<% end%>
+							</tr></table>
+<tr>
+<% end %>
+</table>

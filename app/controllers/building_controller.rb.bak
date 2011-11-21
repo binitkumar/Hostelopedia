@@ -1,0 +1,77 @@
+class BuildingController < ApplicationController
+	layout 'standard'
+	def list
+		@building = Building.find(:all,:conditions=>["user_id=?",current_user.id])
+	end
+	def detail
+		@floor = Floor.find(:all,:conditions=>["building_id=?",params[:id] ])
+		@total = 0
+		@current_count = 0
+		@building = Building.find(:first,:conditions=>["id=?",params[:id] ])
+			@building.floors.each do |flr|
+				flr.rooms.each do |rom|
+					rom.beds.each do | bd |
+						if ! bd.available_student.nil? or ! bd.under_notice_student.nil?
+								@current_count = @current_count + 1
+						end
+						@total = @total+ 1
+					end
+				end
+			end
+	end
+	def add_new
+	end
+	def add
+		build = Building.new
+		build.name = params[:building_name]
+		build.address = params[:building_address]
+		build.security_guard = params[:building_security_guard]
+		build.user_id = params[:owner_id]
+		build.save
+		redirect_to :action=>'list'
+	end
+	def json_resp
+
+		a ="Hello Json"
+		render :json=>a.to_json
+	end
+	def add_floor
+	end
+	def adding_floor
+		floor = Floor.new
+		floor.name = params[:floor_name]
+		floor.building_id = params[:building_id]
+		floor.save
+		redirect_to :action=>'edit'
+	end
+	def add_room
+		@floor = Floor.find(:all,:conditions=>["building_id=?",params[:id].to_i] )
+	end
+	def adding_room
+		room = Room.new
+		room.name = params[:room_name]
+		room.floor_id = params[:floor_id]
+		room.save
+		redirect_to :action=>'edit'
+	end
+	def add_bed
+		@room = Room.find_by_sql("select * from rooms where floor_id in (select id from floors where building_id = #{params[:id]})");
+	end
+	def adding_bed
+		bed = Bed.new
+		bed.position = params[:bed_name]
+		bed.room_id = params[:room_id]
+		bed.save
+		redirect_to :action=>'edit'
+	end
+	def edit
+		@building = Building.find(:all,:conditions=>["user_id=?",current_user.id])
+	end
+	def change_owner
+	end
+	def modify_owner
+		bld = Building.find(params[:building_id])
+		bld.user_id = params[:new_owner_id]
+		redirect_to :action=>'list'
+	end
+end

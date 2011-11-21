@@ -1,0 +1,33 @@
+<h1>Payments</h1>
+<table class=container>
+<tr><td colspan=4 class=header_info>Get Payment's List</td></tr>
+<form action='/transection/payment' method=post onsubmit="return validateForm()">
+	<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" >
+	<tr>
+		<td class=column_info>Starting Date</td>
+		<td colspan=3><input type=text readonly="readonly" name=start_date id="start_date" /></td>
+	</tr>
+	<tr>
+		<td class=column_info>Ending Date</td>
+		<td colspan=3><input type=text readonly="readonly" name=end_date  id="end_date" /></td>
+	</tr>
+	<tr>
+		<td colspan=4 align=center><input type=submit value="View Payment" class=submitter /></td>
+	</tr>
+</form>
+<% if ! @transections.nil? %>
+	<tr><td class=header_info>Date</td><td class=header_info>By</td><td class=header_info>Details</td><td class=header_info>Amount</td></tr>
+	<% if @transections.length == 0%>
+		<tr><td colspan=6 style="text-align:center" class=column_info >No records found. </td></tr>
+	<% end %>
+	<% @transections.each do | trans |%>
+		<tr><td><%= trans.created_at.strftime('%d/%m/%Y')%></td><td><%= trans.student.name if !trans.student.nil?%></td><td><%=trans.details %></td><td><%=trans.amount%></td></tr>
+	<%end %>
+<% end %>
+</table>
+<script language=javascript>
+$().ready(function(){
+	$('#start_date').datePicker({startDate:'01/01/1900'});
+	$('#end_date').datePicker({startDate:'01/01/1900'});
+});
+</script>

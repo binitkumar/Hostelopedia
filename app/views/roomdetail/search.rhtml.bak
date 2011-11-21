@@ -1,0 +1,21 @@
+<h1>Search Room Details</h1>
+<table class=container>
+	<form action='/roomdetail/search_result' method=post>
+	<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" >
+	<tr>
+		<td>Room Name :</td>
+		<td>
+			<select name=room_id>
+			<% Building.find(:all,:conditions=>["user_id=?",current_user.id]).each do | build |%>
+			<% Floor.find(:all,:conditions=>["building_id=?",build.id]).each do | flr |%>
+			<% Room.find(:all,:conditions=>["floor_id=?",flr.id]).each do |rm |%>
+				<option value= <%= rm.id %> ><%= build.name+" "+flr.name+" "+rm.name %></option>
+			<% end %>
+			<% end %>
+			<% end %>
+			</select>
+		</td>
+	</tr>
+	<tr><td colspan=2 align=center><input type=submit value="Search" /></td></tr>
+	</form>
+</table>

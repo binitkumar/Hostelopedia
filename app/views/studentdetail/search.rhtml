@@ -1,0 +1,16 @@
+<h1>Search details by Students Name</h1>
+<table class=container>
+	<form action='/studentdetail/search_result' method=post onSubmit="return validateForm()">
+	<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" >
+	<tr><td class=column_info>Name :</td><td><input type=text name=student_name id='student_name' />
+	<tr><td colspan=2 align=center><input type=submit value="Search" class='submitter' /></td></tr>
+	</form>
+</table>
+<script language=javascript>
+function validateForm(){
+	if( ! validateNotEmpty($('#student_name').val() ) ){
+		alert("Name can't be blank.");
+		return false;
+	}
+}
+</script>

@@ -1,0 +1,7 @@
+class LoginController < ApplicationController
+def varify
+	redirect_to: { :controller=>'building',:action=>'list' }
+end
+def logout
+end
+end

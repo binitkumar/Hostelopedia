@@ -1,0 +1,22 @@
+<h1>Building List</h1>
+<% if !flash[:message].nil? %>
+<h3><%= flash[:message] %></h3>
+<% end %>
+<table class=container>
+<% if @building.length == 0 %>
+<table>
+		<tr><td class=header_info colspan=2>No Buildings available. Please create your building with bulding editor.</td></tr>
+</table>
+<% end %>
+<% @building.each do |build | %>
+
+	<tr><td>
+		<table>
+		<tr><td class=header_info colspan=2><%= build.name %></td></tr>
+		<tr><td class=column_info>Address:</td><td><%= build.address %></td></tr>
+		<tr><td class=column_info>Security Guards:</td><td><% build.security_guard %></td></tr>
+		<tr><td colspan=2 align=center><%= link_to("Show Details", "/building/detail/#{build.id}")%></td></tr>
+		</table>
+	</td></tr>
+<% end %>
+</table>

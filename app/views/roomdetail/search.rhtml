@@ -1,0 +1,23 @@
+<h1>Search Room Details</h1>
+<table class=container>
+	<form action='/roomdetail/search_result' method=post>
+	<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" >
+	<tr>
+		<td class=column_info>Room Name :</td>
+		<td>
+			<% if my_rooms.length == 0 %>
+				No rooms available.
+			<% else %>
+				<select name=room_id>
+				<% my_rooms.each do |rm |%>
+					<option value= <%= rm.id %> ><%= rm.floor.building.name+" "+rm.floor.name+" "+rm.name %></option>
+				<% end %>
+				</select>
+			<% end %>
+		</td>
+	</tr>
+	<% if my_rooms.length != 0 %>
+	<tr><td colspan=2 align=center class=column_info><input class=submitter type=submit value="Search" /></td></tr>
+	<% end %>
+	</form>
+</table>

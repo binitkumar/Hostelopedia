@@ -1,0 +1,27 @@
+<h1>Registrations</h1>
+<table class=container>
+<tr><td colspan=4 class=header_info>Add New User</td></tr>
+<%= ("<tr><td colspan=4 class=column_info>#{flash[:message]}</td></tr>").html_safe if ! flash[:message].nil? %>
+<form action='/admin/add_user' method=post >
+	<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" >
+	<tr>
+		<td class=column_info>E Mail :</td>
+		<td colspan=3><input type=text name=email /></td>
+	</tr>
+	<tr>
+		<td class=column_info>Password :</td>
+		<td colspan=3><input type=text name=password /></td>
+	</tr>
+	<tr>
+		<td class=column_info>Password :</td>
+		<td colspan=3><input type=text name=confirm_password /></td>
+	</tr>
+	<tr>
+		<td class=column_info>Role :</td>
+		<td colspan=3><%= select_tag :role_id, options_for_select(Role.all.collect {|p| [ p.name, p.id ] }) %></td>
+	</tr>
+	<tr>
+		<td colspan=4 align=center><input type=submit value="Create user" class=submitter /></td>
+	</tr>
+</form>
+</table>

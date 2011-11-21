@@ -1,0 +1,30 @@
+<h1> Add New Bed</h1>
+<table class=container>
+	<tr>
+	<td colspan=2 align=center class=header_info>New Bed Details</td>
+	</tr>
+	<form action='/building/adding_bed' method=post onSubmit="return validateForm();" >
+	<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" >
+	<tr>
+		<td>Name</td>
+		<td><input type=text name=bad_name id=bed_name />
+	</tr>
+	<tr>
+		<td>Room Name :</td>
+		<td> <%=@room.name %>
+		</td>
+		<input type=hidden name=room_id value=<%=@room.id%> >
+	</tr>
+	<tr><td colspan=2 align=center><input type=Submit value="Add Bed" class=submitter />
+	</form>
+</table>
+<script language=javascript>
+function validateForm(){
+	note = $("#bed_name").val();
+	if (! validateNotEmpty(note) ){ 
+		alert("Bed name is blank.");
+		return false;
+	}
+	return true;
+}
+</script>

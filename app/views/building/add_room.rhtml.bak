@@ -1,0 +1,33 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>Add New Room</TITLE>
+</HEAD>
+
+<BODY>
+<h1> Add New Room</h1>
+<table>
+	<tr>
+	<td colspan=2 align=center class=header_info>New Details Details</td>
+	</tr>
+	<form action='/building/adding_room' method=post>
+	<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" >
+	<tr>
+		<td>Name</td>
+		<td><input type=text name=room_name />
+	</tr>
+	<tr>
+		<td>Floor Name :</td>
+		<td> <select name=floor_id >
+			<% @floor.each do |floor| %>
+				<option value=<%= floor.id %> ><%= floor.name %></option>
+			<% end %>
+		     </select>
+		</td>
+		<input type=hidden name=building_id value= <%= params[:id] %> >
+	</tr>
+	<tr><td colspan=2 align=center><input type=Submit value="Add Room" />
+	</form>
+</table>
+</BODY>
+</HTML>

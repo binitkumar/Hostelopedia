@@ -1,0 +1,129 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>Hostelopedia</title>
+  <%= stylesheet_link_tag "style" %>
+  <%= stylesheet_link_tag "datePicker" %>
+  <%= javascript_include_tag :defaults %>
+  <%= javascript_include_tag "jquery" %>
+  <%= javascript_include_tag "date" %>
+  <%= javascript_include_tag "datePicker" %>
+  <%= javascript_include_tag "validater" %>
+</head>
+
+<body>
+  <div id="main">
+    <div id="header">
+      <div id="logo">
+        <div id="logo_text">
+	<% unless user_signed_in? -%>
+		 <li style="text-align:right"><%= link_to "Sign in", new_user_session_path%></li>
+	<% else -%>
+		<li style="text-align:right"><%= link_to "Sign out", destroy_user_session_path, :method => :delete , :class=>'logout' %></li>
+	<% end -%>
+
+          <!-- class="logo_colour", allows you to change the colour of the text -->
+          <h1><a href="/building/list">Hostelopedia<span class="logo_colour">Hostel Management System</span></a></h1>
+          <h2>Maintaining hostel is a fun now.</h2>
+        </div>
+      </div>
+    </div>
+    <div id="site_content">
+      <div id="sidebar_container">
+        <div class="sidebar">
+          <div class="sidebar_top"></div>
+          <div class="sidebar_item">
+            <!-- insert your sidebar items here -->
+            <h3> Reminders</h3><hr>
+			<ul>
+				<li><a href='/reminder/days_reminder'>Today's Reminder</a></li>
+				<li><a href='/roomdetail/vacancy_search'>Vacancy Search</a></li>
+				<li><a href='/reminder/random_reminder'>Reminder Notes</a></li>
+			</ul>
+          </div>
+          <div class="sidebar_base"></div>
+        </div>
+		<div class="sidebar">
+          <div class="sidebar_top"></div>
+          <div class="sidebar_item">
+            <h3>Search</h3><hr>
+			<ul>
+				<li><a href='/roomdetail/search'>Room wise</a></li>
+				<li><a href='/studentdetail/search'>Student wise</a></li>
+				<li><form action='/building/navigator' method=post id=quick_navigator>
+					<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" >
+					<select name=building_id id=building_selector>
+					<option id=0>Select Building</option>
+					<% if !current_user.nil? %>
+					<% Building.find(:all,:conditions=>["user_id=?",current_user.id]).each do |bld| %>
+						<option value=<%= bld.id %> ><%=bld.name%></option>
+					<%end%>
+					<% end %>
+					</select>
+					</form>
+				</li>
+			</ul>
+          </div>
+          <div class="sidebar_base"></div>
+        </div>
+		<div class="sidebar">
+          <div class="sidebar_top"></div>
+          <div class="sidebar_item">
+            <!-- insert your sidebar items here -->
+            <h3> Transection</h3><hr>
+			<ul>
+				<li><a href='/transection/list'>Transections</a></li>
+				<li><a href='/transection/payment'>Payments</a></li>
+				<li><a href='/transection/income'>Incomes</a></li>
+			</ul>
+          </div>
+          <div class="sidebar_base"></div>
+        </div>
+	<div class="sidebar">
+          <div class="sidebar_top"></div>
+          <div class="sidebar_item">
+            <!-- insert your sidebar items here -->
+            <h3>Building Management</h3><hr>
+			<ul>
+				<li><a href='/building/add_new'>Add Building</a></li>
+				<li><a href='/building/edit'>Edit Building</a></li>
+				<li><a href='/building/change_owner'>Change Owner</a></li>
+			</ul>
+          </div>
+          <div class="sidebar_base"></div>
+        </div>
+		<div class="sidebar">
+          <div class="sidebar_top"></div>
+          <div class="sidebar_item">
+            <!-- insert your sidebar items here -->
+            <h3>My Profile</h3><hr>
+			<ul>
+				<li><a href='#'>My Profile</a></li>
+				<li><a href='#'>Hostelopedia user report</a></li>
+				<li><a href='#'>User comments</a></li>
+			</ul>
+          </div>
+          <div class="sidebar_base"></div>
+        </div>
+      </div>
+      <div id="content">
+      <div class=container style="text-align:center">
+        <%= yield -%>
+      </div>
+      </div>
+    </div>
+    <div id="footer">
+      <p>Copyright &copy; TELM </p>
+    </div>
+    <p>&nbsp;</p>
+  </div>
+</body>
+</html>
+<script language=javascript>
+jQuery('#building_selector').change(function(){
+	value = jQuery('#building_selector').val();
+	if (value != 0){
+		jQuery('#quick_navigator').submit();
+	}
+});
+</script>

@@ -1,0 +1,2 @@
+class AdvanceBooking < ActiveRecord::Base
+end

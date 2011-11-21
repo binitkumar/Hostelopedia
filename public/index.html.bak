@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hostel Management Sysem</title>
+  </head>
+  <body>
+  <div style='margin-top:250px' align=center>
+  <form action='/mainpage.html' method=post>
+  <table>
+  <tr><td>User Name :</td><td> <input type:text name=user_name /></td></tr>
+  <tr><td>Password : </td><td><input type: password name=password /></td></tr>
+  <td colspan=2 align=center><input type=submit value="Log in" /></td>
+  </table>
+  </form>
+  </div>
+  </body>
+</html>

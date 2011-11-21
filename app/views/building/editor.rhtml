@@ -1,0 +1,47 @@
+<h1>Building Details</h1>
+<% if !flash[:message].nil? %>
+<h3><%= flash[:message] %></h3>
+<% end %>
+<table class=container>
+	<tr><td colspan=2  class=header_info>Name :<%= @building.name %></td></tr>
+	<tr><td>Total Seates :</td><td align=left ><%= @total %></td></tr>
+	<tr><td>Occupied :</td><td align=left ><%= @current_count %></td></tr>
+	<tr><td colspan=2  class=header_info>Status</td></tr>
+	<tr><td colspan=2><form action="/building/add_floor/<%=@building.id%>"><input type=submit value='Add Floor' class=submitter /></form></td></tr>
+	<% @floor.each do | floor |%>
+		<tr><td colspan=2 class=header_info><%= floor.name %></td></tr>
+		<tr><td colspan=2 align=center>
+			<table>
+				<tr>
+				<% room_count = 0 %>
+				<tr><td class=subheader><form action=<%= "/building/add_room/"+floor.id.to_s %> ><input type=submit value="Add Room" class=submitter /></form></td></tr>
+				<% floor.rooms.each do |room|%>
+					<% room_count+=1 %>
+					<td><table>
+						<tr><td class=subheader><%= link_to("#{room.name}", "/roomdetail/search_result/#{room.id}",:class=>'build_component') %>	</td></tr>
+						<tr><td class=editor>
+							<form action="/building/add_bed">
+								<input type=hidden name=room_id value=<%= room.id %> >
+								<input type=submit value='Add Bed' class=submitter />
+							</form>
+							</td>
+						</tr>
+						<% room.beds.each do |bed| %>
+							<% if bed.available_student.nil? && bed.under_notice_student.nil? %>
+								<tr><td class=vacant><%= link_to('Vacant',"/studentdetail/add_new/#{bed.id}") %></td></tr>
+							<% elsif !bed.under_notice_student.nil? %>
+								<tr><td class=noticed><%= link_to("#{bed.under_notice_student.name}","/studentdetail/detail/#{bed.under_notice_student.id}") %></td></tr>
+							<% else %>
+								<tr><td><%= link_to("#{bed.available_student.name.length > 4 ? bed.available_student.name[0..3]+".." : bed.available_student.name }","/studentdetail/detail/#{bed.students[0].id}",:class=>'occupied') %></td></tr>
+							<% end %>
+						<% end%>
+					</table></td>
+					<% if room_count%6==0 %>
+						</tr><tr>
+					<% end %>
+				<% end%>
+				</tr>
+			</table>
+		<tr>
+	<% end %>
+</table>

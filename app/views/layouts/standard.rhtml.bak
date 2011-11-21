@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>Hostel Management System</title>
+  <%= stylesheet_link_tag "style" %>
+  <%= javascript_include_tag :defaults %>
+</head>
+
+<body>
+  <div id="main">
+    <div id="header">
+      <div id="logo">
+        <div id="logo_text">
+	<p class="notice"><%= notice %></p>
+	<p class="alert"><%= alert %></p>
+	<% unless user_signed_in? -%>
+		 <li><%= link_to "Sign in", new_user_session_path %></li>
+	<% else -%>
+		<li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
+	<% end -%>
+
+          <!-- class="logo_colour", allows you to change the colour of the text -->
+          <h1><a href="/building/list">Basheer's<span class="logo_colour">Womens & Gents Hostel</span></a></h1>
+          <h2>A Shelter for all.</h2>
+        </div>
+      </div>
+    </div>
+    <div id="site_content">
+      <div id="sidebar_container">
+        <div class="sidebar">
+          <div class="sidebar_top"></div>
+          <div class="sidebar_item">
+            <!-- insert your sidebar items here -->
+            <h3> Reminders</h3>
+			<ul>
+				<li><a href='/reminder/days_reminder'>Today's Reminder</a></li>
+				<li><a href='/roomdetail/vacancy_search'>Vacancy Search</a></li>
+			</ul>
+          </div>
+          <div class="sidebar_base"></div>
+        </div>
+	<div class="sidebar">
+          <div class="sidebar_top"></div>
+          <div class="sidebar_item">
+            <!-- insert your sidebar items here -->
+            <h3>Building Management</h3>
+			<ul>
+				<li><a href='/building/add_new'>Add Building</a></li>
+				<li><a href='/building/edit'>Edit Building</a></li>
+				<li><a href='/building/change_owner'>Change Owner</a></li>
+			</ul>
+          </div>
+          <div class="sidebar_base"></div>
+        </div>
+        <div class="sidebar">
+          <div class="sidebar_top"></div>
+          <div class="sidebar_item">
+            <h3>Search</h3>
+			<ul>
+				<li><a href='/roomdetail/search'>Room wise</a></li>
+				<li><a href='/studentdetail/search'>Student wise</a></li>
+			</ul>
+          </div>
+          <div class="sidebar_base"></div>
+        </div>
+      </div>
+      <div id="content">
+      <div class=container style="text-align:center">
+        <%= yield -%>
+      </div>
+      </div>
+    </div>
+    <div id="footer">
+      <p>Copyright &copy; TELM </p>
+    </div>
+    <p>&nbsp;</p>
+  </div>
+</body>
+</html>

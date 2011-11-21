@@ -1,0 +1,72 @@
+<script language=javascript>
+jQuery(document).ready(function(){
+jQuery('select#filter_selector').change(function(){
+	jQuery('#filter_search').submit();
+});
+});
+</script>
+<h1>Availabe Room Details</h1>
+<table class=container>
+	<tr>
+		<td class=header_info>Building</td>
+		<td class=header_info>Floor</td>
+		<td class=header_info>Room</td>
+		<td class=header_info>Beds :<form action='/roomdetail/vacancy_search' method=post id=filter_search>
+										<select name=filter id=filter_selector>
+											<% (1..8).each do |level| %>
+												<% if level == @filter %>
+													<option id=<%=level%> selected=true> <%= level %> </option>
+												<% else%>
+													<option id=<%=level%> > <%= level %> </option>
+												<% end %>
+											<% end %>
+										</select>
+										<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" >
+										</form></td>
+		<td  class=header_info>Status</td>
+		<td  class=header_info>Action</td>
+		<td class=header_info>Advance Booking</td>
+	</tr>
+		<% row_count = 0 %>
+		<% my_rooms.each do |rm| %>
+			<% if rm.vacant_beds.size >1 && rm.beds.size == @filter %>
+				<%row_count += 1 %>
+				<tr>
+				<td><%=rm.floor.building.name%></td>
+				<td><%=rm.floor.name%></td>
+				<td><%=rm.name%></td>
+				<td><%= rm.vacant_beds.count %></td>
+				<td>Vacant</td>
+				<td colspan=2><form action=<%= "/studentdetail/add_new/"+(rm.beds[0]).id.to_s %> ><input type=submit class=submitter value=Assign /> </form></td>
+				</tr>
+			<% end %>
+		<% end %>
+		<% if row_count == 0%>
+		<tr><td colspan=7 class=column_info >No record found.</td></td>
+		<% end %>
+	<% if params[:filter] == '1' || params[:filter].nil? %>
+	<% Building.find(:all,:conditions=>["user_id=?",current_user.id]).each do | bld | %>
+		<% bld.floors.each do |flr| %>
+		<% flr.rooms.each do |rm| %>
+			<% rm.beds.each do |bd| %>
+					
+				<% if ! bd.not_advance_booked? || bd.under_notice_student %>
+					<tr>
+					<td><%=bd.room.floor.building.name%></td>
+					<td><%=bd.room.floor.name%></td>
+					<td><%=bd.room.name%></td>
+					<td>Under Notice</td>
+					<td>Avalilabe by Date : <%= VacatingNotice.find(:first,:conditions=>["student_id=?",bd.under_notice_student]).exit_date.strftime('%d/%m/%y') if bd.under_notice_student %> </td>
+					<% if bd.not_advance_booked? %>
+						<td colspan=2><form action='/roomdetail/advance_booking/<%=bd.id%>'><input type=submit class=submitter value='Advance Booking' /></form></td>
+					<% else %>
+						<td>Advance Booked</td><td><form action='/studentdetail/add_new/<%=bd.id%>'><input type=submit class=submitter value='Allocate' /></form></td>
+					<% end %>
+					</tr>	
+				<% end %>
+			<% end %>
+		<% end %>
+		<% end %>
+	<% end %>
+	<% end %>
+</table>

@@ -1,0 +1,24 @@
+class RoomdetailController < ApplicationController
+layout 'standard'
+def detail
+end
+def search
+	@build = Building.find(:all,:conditions=>["user_id=?",current_user.id])
+end
+def search_result
+	if params[:room_id].nil?
+	@rm = Room.find(params[:id])
+	else
+	@rm = Room.find(params[:room_id])
+	end
+end
+def advance_booking
+end
+def advance_book_room
+	adv = AdvanceBooking.new
+	adv.bed_id = params[:bed_id]
+	adv.amount = params[:amount]
+	adv.save!
+	redirect_to :action => 'search_result', :room_id=> Bed.find(params[:bed_id]).room.id
+end
+end

@@ -1,0 +1,29 @@
+<h1> Add New Floor</h1>
+<table class=container>
+	<tr>
+	<td colspan=2 align=center class=header_info>New Floor Details</td>
+	</tr>
+	<form action='/building/adding_floor' method=post onSubmit="return validateForm();">
+	<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" >
+	<tr>
+		<td class=column_info>Name :</td>
+		<td><input type=text name=floor_name id=floor_name />
+	</tr>
+	<tr>
+		<td class=column_info>Building Name :</td>
+		<td><%= Building.find_by_id(params['id']).name %></td>
+		<input type=hidden name=building_id value= <%= params[:id] %> >
+	</tr>
+	<tr><td colspan=2 align=center><input type=Submit value="Add Floor"  class=submitter />
+	</form>
+</table>
+<script language=javascript>
+function validateForm(){
+	note = $("#floor_name").val();
+	if (! validateNotEmpty(note) ){ 
+		alert("Floor name is blank.");
+		return false;
+	}
+	return true;
+}
+</script>

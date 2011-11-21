@@ -1,0 +1,24 @@
+
+<h1>Room Details</h1>
+<table class=container>
+	<tr>
+		<td  class=header_info>Name</td>
+		<td  class=header_info>Status</td>
+	</tr>
+	<% row_count = 0 %>
+	<% Bed.find(:all,:conditions=>["room_id=?", @rm.id ]).each do |bd| %>
+	<% row_count += 1 %>
+	<tr>
+		<% if bd.available_student.nil?%>
+			<td><a class='detail_link'  href=<%= "/studentdetail/add_new/"+bd.id.to_s %> >Assign </a></td>
+			<td>Vacant</td>
+		<% else %>
+			<td><a class='detail_link' href=<%= '/studentdetail/detail/'+bd.available_student.id.to_s %> ><%=bd.available_student.name%></a>
+			</td><td>Continuous</td>
+		<% end %>
+	</tr>
+	<%end%>
+	<% if row_count ==0 %>
+		<tr><td class=column_info colspan=2 style="text-align:2">No records found.</td></tr>
+	<% end %>
+</table>

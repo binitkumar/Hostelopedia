@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>Hostel Management System</title>
+  <%= stylesheet_link_tag "style" %>
+  <%= csrf_meta_tag %>
+</head>
+
+<body>
+  <div id="main">
+    <div id="header">
+      <div id="logo">
+        <div id="logo_text">
+	<p class="notice"><%= notice %></p>
+	<p class="alert"><%= alert %></p>
+	<% unless user_signed_in? -%>
+		 <li><%= link_to "Sign in", new_user_session_path %></li>
+	<% else -%>
+		<li><%= link_to "Sign out", destroy_user_session_path %></li>
+	<% end -%>
+
+          <!-- class="logo_colour", allows you to change the colour of the text -->
+          <h1><a href="/building/list">Basheer's<span class="logo_colour">Womens & Gents Hostel</span></a></h1>
+          <h2>A Shelter for all.</h2>
+        </div>
+      </div>
+    </div>
+    <div id="site_content">
+      <div id="content">
+        <%= yield -%>
+      </div>
+    </div>
+    <div id="footer">
+      <p>Copyright &copy; TELM </p>
+    </div>
+    <p>&nbsp;</p>
+  </div>
+</body>
+</html>

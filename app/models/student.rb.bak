@@ -1,0 +1,26 @@
+class Student < ActiveRecord::Base
+ belongs_to :bed
+ has_attached_file :profile_photo
+
+ has_attached_file :document_photo
+
+ def next_payment_date
+	start_date = self.created_at
+	transection_amount = Transection.find_by_sql("select sum(amount) as total from transections where user_id=#{self.id} and rent_month !='' ")
+	spend_time_in_sec = Time.now.to_i - created_at.to_i
+	spend_time_in_month= spend_time_in_sec/(30*24*60*60)
+	self.created_at + (spend_time_in_month ).month
+  end
+  def is_payment_defaulter?
+	start_date = self.created_at
+	transection_amount = Transection.find_by_sql("select sum(amount) as total from transections where user_id=#{self.id} and rent_month !='' ")
+	spend_time_in_sec = Time.now.to_i - created_at.to_i
+	spend_time_in_month= spend_time_in_sec/(24*60*60)
+	amount_to_be_paid = spend_time_in_month * self.monthly_rent/30
+	if(amount_to_be_paid.to_i >= transection_amount[0].total.to_i)
+		return true
+	else
+		return false
+	end
+  end
+end

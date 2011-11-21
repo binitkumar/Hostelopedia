@@ -1,0 +1,2 @@
+<a href=/studentdetail/detail/<%= params[:id] %> >Back</a>
+<%= image_tag @stud.document_photo.url,:width=> "200px",:height=>"300px" %>

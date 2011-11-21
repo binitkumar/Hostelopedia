@@ -1,0 +1,21 @@
+<h1>Reminders on date <%= Time.now.to_date.strftime('%d/%m/%y') %></h1>
+<table class=container>
+	<tr>
+		<td class=header_info>Student Name</td>
+		<td class=header_info>Due Date</td>
+		<td class=header_info>Building Name</td>
+		<td class=header_info>Room No.</td>
+	</tr>
+	<% if ! @reminder_student.nil?%>
+	<% @reminder_student.each do |reminder|%>
+	<tr>
+		<td><a href="/studentdetail/detail/<%=reminder.id%>"><%= reminder.name %></a></td>
+		<td><%= reminder.next_payment_date.strftime('%d/%m/%y')%></td>
+		<td><%= reminder.bed.room.floor.building.name %></td>
+		<td><%= reminder.bed.position %></td>
+	</tr>
+	<%end%>
+	<% else %>
+	<tr><td colspan=4 align=center>No record found.</td></tr>
+	<% end %>
+</table>

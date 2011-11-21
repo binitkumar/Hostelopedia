@@ -1,0 +1,90 @@
+<h1>Student Details</h1>
+<table class=container>
+	<tr>
+		<td class=column_info>Name</td>
+		<td><%= @student.name %></td>
+		<td rowspan=7 colspan=2><%= image_tag @student.profile_photo.url,:width=> "200px",:height=>"200px" %></td>
+	</tr>
+	<tr>
+		<td class=column_info>Address</td>
+		<td><%= @student.permanent_address %></td>
+	</tr>
+	<tr>
+		<td class=column_info>Phone No.</td>
+		<td><%= @student.phone_no %></td>
+	</tr>
+	<tr>
+		<td class=column_info>Work Phone No.</td>
+		<td><%= @student.work_phone_no %></td>
+	</tr>
+	<tr>
+		<td class=column_info>E Mail ID</td>
+		<td><%= @student.email %></td>
+	</tr>
+	<tr>
+		<td class=column_info>Purpose</td>
+		<td><%= @student.purpose_of_visit %></td>
+	</tr>
+	<tr style="font-weight:bold">
+		<td class=column_info>Vacating Date :</td>
+		<td><%
+			vacating_notice = VacatingNotice.find(:first,:conditions=>["student_id=?", @student.id ])
+			if ! vacating_notice.nil? %>
+			<%=  VacatingNotice.find(:first,:conditions=>["student_id=?", @student.id ]).exit_date.strftime('%d/%m/%y')   %>
+			<% else %>
+			<%=  @student.updated_at.strftime('%d/%m/%y')   %>
+			<% end %>
+			</td>
+	</tr>
+	<tr>
+		<td class=column_info>Advance Paid</td>
+		<td><%=@student.advance_amount%></td>
+		<td class=column_info>Joining_date</td>
+		<td><%= @student.created_at.strftime('%d/%m/%Y').to_s %></td>
+	</tr>
+	<tr>
+		<td class=column_info>Monthly Rental</td>
+		<td><%= @student.monthly_rent %></td>
+		<td class=column_info>Marked:</td>
+		<% if @student.flag %>
+			<td>Yes <% if @student.status != 'Vacated'%>
+			
+					<form action='/studentdetail/flag' >
+						<input type=hidden name=id value=<%=@student.id%> />
+						<input type=submit value=Unmark class=submitter />
+					</form>
+					
+					<% end %>
+			</td>
+		<% else %>
+			<td>No <% if @student.status != 'Vacated'%>
+					<form action='/studentdetail/flag' >
+					<input type=hidden name=id value=<%=@student.id%> />
+					<input type=submit value=Mark class=submitter />
+					</form>
+					<% end %>
+			</td>
+		<% end %>
+	</tr>
+	<tr>
+		<td class=column_info>Total Amount to be refunded</td>
+		<td><%= @refunding_amount %></td>
+		<td colspan=2>&nbsp;</td>
+	</tr>
+	<tr><td colspan=2 align=center class=header_info>Transection Details</td><td colspan=2><a class=detail_link href="#" id="trans_toggle">Show</a></td></tr>
+	<tr class=trans_details style="display:none"><td class=column_info>Date</td><td class=column_info>Month</td><td class=column_info>Amount</td><td class=column_info>Details</td></tr>
+	<% @transections.each do |trans|%>
+	<tr class=trans_details style="display:none"><td><%= trans.created_at.to_date.strftime('%d/%m/%y') %></td><td><%= trans.rent_month %></td><td><%= trans.amount %></td><td><%= trans.details %></td></tr>
+	<% end %>
+</table>
+<script language=javascript>
+$('#trans_toggle').click(function(){
+	if ( $('.trans_details').css("display") == "table-row" ){
+		$('#trans_toggle').text("Show");
+		$('.trans_details').css("display","none");
+	}else{
+	$('#trans_toggle').text("Hide");
+	$('.trans_details').css("display","table-row");	
+	}
+});
+</script>

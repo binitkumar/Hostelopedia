@@ -1,0 +1,7 @@
+<h1>Search results for  Student Name <%= params[:student] %></h1>
+<table class=container>
+<% @stud.each do | stud |%>
+	<tr><td class=header_info>Name </td><td class=header_info>Room</td><td class=header_info>Bed</td><td class=header_info>Status</td><td class=header_info>View Deails</td></tr>
+	<tr><td><%= stud.name %></td><td><%= stud.bed.room.name %></td><td><%= stud.bed.position %></td><td><%= stud.status %></td><td><a href="/studentdetail/detail/<%=stud.id%>">Details</a></td></tr>
+<% end %>
+</table>

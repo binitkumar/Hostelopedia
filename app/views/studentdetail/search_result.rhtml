@@ -1,0 +1,23 @@
+<h1>Search results for  Student Name <%= params[:student] %></h1>
+<table class=container>
+<tr><td class=header_info>Name </td><td class=header_info>Room</td><td class=header_info>Building</td><td class=header_info>Status</td><td class=header_info>View Deails</td></tr>
+<% if @stud.length == 0 %>
+	<tr><td colspan=6 class=column_info>No record available.</td></tr>
+<% end %>
+<% @stud.each do | stud |%>
+
+	<tr>
+		<td><%= stud.name %></td>
+		<% if stud.bed.nil?%>
+		<td>Not available</td>
+		<td>Not available</td>
+		<td>Vacated</td>
+		<% else %>
+		<td><%= stud.bed.room.name %></td>
+		<td><%= stud.bed.room.floor.building.name %></td>
+		<td><%= stud.status %></td>
+		<% end %>
+		<td><a href=<%= "/studentdetail/detail/"+stud.id.to_s %> >show</a></td>
+	</tr>
+<% end %>
+</table>

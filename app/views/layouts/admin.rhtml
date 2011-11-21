@@ -1,0 +1,98 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>Hostelopedia</title>
+  <%= stylesheet_link_tag "style" %>
+  <%= stylesheet_link_tag "datePicker" %>
+  <%= javascript_include_tag :defaults %>
+  <%= javascript_include_tag "jquery" %>
+  <%= javascript_include_tag "date" %>
+  <%= javascript_include_tag "datePicker" %>
+  <%= javascript_include_tag "validater" %>
+</head>
+
+<body>
+  <div id="main">
+    <div id="header">
+      <div id="logo">
+        <div id="logo_text">
+	<% unless user_signed_in? -%>
+		 <li style="text-align:right"><%= link_to "Sign in", new_user_session_path%></li>
+	<% else -%>
+		<li style="text-align:right"><%= link_to "Sign out", destroy_user_session_path, :method => :delete , :class=>'logout' %></li>
+	<% end -%>
+
+          <!-- class="logo_colour", allows you to change the colour of the text -->
+          <h1><a href="/building/list">Hostelopedia<span class="logo_colour">Hostel Management System</span></a></h1>
+          <h2>Maintaining hostel is a fun now.</h2>
+        </div>
+      </div>
+    </div>
+    <div id="site_content">
+      <div id="sidebar_container">
+        <div class="sidebar">
+          <div class="sidebar_top"></div>
+          <div class="sidebar_item">
+            <!-- insert your sidebar items here -->
+            <h3> Requests Panel</h3><hr>
+			<ul>
+				<li><a href='#'>Today's Requests</a></li>
+				<li><a href='#'>Pending Requests</a></li>
+				<li><a href='#'>Request History</a></li>
+			</ul>
+          </div>
+          <div class="sidebar_base"></div>
+        </div>
+		<div class="sidebar">
+          <div class="sidebar_top"></div>
+          <div class="sidebar_item">
+            <h3>Users Panel</h3><hr>
+			<ul>
+				<li><a href='#'>Colobraters List</a></li>
+				<li><a href='#'>Partner's List</a></li>
+				<li><a hrerf='#'>User's List</a></li>
+				<li><a href='/admin/new_user'>Add user</a></li>
+			</ul>
+          </div>
+          <div class="sidebar_base"></div>
+        </div>
+		<div class="sidebar">
+          <div class="sidebar_top"></div>
+          <div class="sidebar_item">
+            <!-- insert your sidebar items here -->
+            <h3> Transections Panel</h3><hr>
+			<ul>
+				<li><a href='#'>Transections</a></li>
+				<li><a href='#'>Payments</a></li>
+				<li><a href='#'>Incomes</a></li>
+			</ul>
+          </div>
+          <div class="sidebar_base"></div>
+        </div>
+	<div class="sidebar">
+          <div class="sidebar_top"></div>
+          <div class="sidebar_item">
+            <!-- insert your sidebar items here -->
+            <h3>Activities Details</h3><hr>
+			<ul>
+				<li><a href='#'>Network Traffic</a></li>
+				<li><a href='#'>Newses</a></li>
+				<li><a href='#'>Advertisements</a></li>
+			</ul>
+          </div>
+          <div class="sidebar_base"></div>
+        </div>
+      </div>
+      <div id="content">
+      <div class=container style="text-align:center">
+        <%= yield -%>
+      </div>
+      </div>
+    </div>
+    <div id="footer">
+      <p>Copyright &copy; TELM </p>
+    </div>
+    <p>&nbsp;</p>
+  </div>
+</body>
+</html>

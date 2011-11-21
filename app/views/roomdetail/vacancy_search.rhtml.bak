@@ -1,0 +1,41 @@
+<h1>Availabe Room Details</h1>
+<table class=container>
+	<tr>
+		<td class=header_info>Bed</td>
+		<td class=header_info>Building</td>
+		<td class=header_info>Floor</td>
+		<td class=header_info>Room</td>
+		<td  class=header_info>Status</td>
+		<td  class=header_info>Action</td>
+		<td class=header_info>Advance Booking</td>
+	</tr>
+	<% Bed.find(:all).each do |bd| %>
+	<% if bd.available_student.nil?%>
+	<tr>
+		<td><%=bd.position %></td>
+		<td><%=bd.room.floor.building.name%></td>
+		<td><%=bd.room.floor.name%></td>
+		<td><%=bd.room.name%></td>
+		<td>Vacant</td>
+		<td colspan=2><a href=<%= "/studentdetail/add_new/"+bd.id.to_s %> >Assign </a></td>
+	</tr>
+	<% end %>
+	<% end %>
+	<% Bed.find(:all).each do |bd| %>
+	<% if bd.under_notice_student%>
+	<tr>
+		<td><%=bd.position %></td>
+		<td><%=bd.room.floor.building.name%></td>
+		<td><%=bd.room.floor.name%></td>
+		<td><%=bd.room.name%></td>
+		<td>Under Notice</td>
+		<td>Avalilabe by Date : <%= VacatingNotice.find(:first,:conditions=>["student_id=?",bd.under_notice_student]).exit_date.strftime('%d/%m/%y') %> </td>
+		<% if ! bd.not_advance_booked? %>
+			<td><a href='/roomdetail/advance_booking/<%=bd.id%>'>Advance Booking</a></td>
+		<% else %>
+			<td>Advance Booked</td>
+		<% end %>
+	</tr>
+	<% end %>
+	<%end%>
+</table>

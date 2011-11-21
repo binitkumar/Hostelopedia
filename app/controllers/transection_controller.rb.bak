@@ -1,0 +1,5 @@
+class TransectionController < ApplicationController
+layout 'standard'
+def list
+end
+end

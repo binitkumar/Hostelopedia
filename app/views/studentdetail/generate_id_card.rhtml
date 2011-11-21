@@ -1,0 +1,9 @@
+<table align=center><tr>
+<td>Mr./Ms. <%= @student.name %> has deposited Rs. <%= @student.advance_amount %> as caution deposite <br>
+and Rs. <%= @student.monthly_rent %> as monthly rent. His joining date is <%=@student.created_at.strftime('%d/%m/%Y') %>.<br>
+
+<br><br><br>
+Basheer Men's & Women's Hostel<br>
+Hyderabad
+</td><td><%= image_tag @student.profile_photo.url,:width=> "200px",:height=>"200px" %></td></tr>
+</table>

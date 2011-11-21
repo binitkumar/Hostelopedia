@@ -1,0 +1,90 @@
+class StudentdetailController < ApplicationController
+layout 'standard'
+def detail
+	@student = Student.find_by_id(params[:id])
+	@transections = Transection.find(:all, :conditions=>["user_id=?", @student.id ] )
+end
+def add_new
+	@student = Student.new
+end
+def adding_student
+	@stud = Student.new
+	@stud.name = params[:student][:name]
+	@stud.monthly_rent = params[:student][:monthly_rent]
+	@stud.comment = params[:student][:comment]
+	@stud.advance_amount = params[:student][:advance_amount]
+	@stud.flag = params[:student][:flag]
+	@stud.qualification = params[:student][:qualification]
+	@stud.permanent_address = params[:student][:permanent_address]
+	@stud.purpose_of_visit = params[:student][:purpose_of_visit]
+	@stud.profile_photo = params[:student][:profile_photo]
+	@stud.document_photo = params[:student][:document_photo]
+	@stud.bed_id = params[:student][:bed_id].to_i
+	@stud.status = 'Continuous'
+	@stud.save
+	assigned_bed = Bed.find_by_id(params[:student][:bed_id].to_i)
+	assigned_bed.student_id = @stud.id
+	assigned_bed.position = params[:student][:bed_id].to_i
+	assigned_bed.save
+	trans = Transection.new
+	trans.user_id = @stud.id
+	trans.details = "Advance amount"
+	trans.amount = @stud.advance_amount
+	trans.rent_month = ""
+	trans.save
+	trans = Transection.new
+	trans.user_id = @stud.id
+	trans.details = "Rent deposite of month :" + Time.now.strftime('%B')
+	trans.amount = @stud.monthly_rent
+	trans.rent_month = Time.now.strftime('%B')
+	trans.save
+	redirect_to :action=>'detail', :id=>@stud.id
+end
+def attach_doc
+	@stud = Student.find(params[:id].to_i)
+end
+def search
+	
+end
+def search_result
+	@stud = Student.find_by_sql("select * from students where soundex(name) = soundex('#{params[:student_name]}')" )
+end
+def action
+	action = params[:student_action]
+	if action == 1
+	elsif action.to_i == 2
+		amount = params[:rent]
+		month = params[:month]
+		trans = Transection.new
+		trans.amount = amount
+		trans.rent_month = month
+		trans.user_id = params[:student_id]
+		trans.details = "Rent deposite of month :" + month
+		trans.save!
+		redirect_to :action=>'detail', :id=>params[:student_id]
+	elsif action.to_i == 3
+		vacatng_notice = VacatingNotice.new
+		student  = Student.find(params[:student_id]) ;
+		vacatng_notice.student_id = params[:student_id]
+		vacatng_notice.bed_id = student.bed.id
+		vacatng_notice.roomt_id = student.bed.room.id
+		string = params[:day]+'/'+params[:month1]+'/'+params[:year]
+		vacatng_notice.exit_date = Date.strptime(string, "%d/%B/%Y")
+		vacatng_notice.save!
+		student.status="Vacating"
+		student.save!
+		redirect_to :action=>'detail', :id=>params[:student_id]
+	elsif action.to_i == 4
+		student  = Student.find(params[:student_id]) ;
+		student.bed_id = params[:bed]
+		student.save!
+		redirect_to :action=>'detail', :id=>params[:student_id]
+	elsif action.to_i == 5
+		student  = Student.find(params[:student_id]) 
+		student.status = 'Vacated'
+		student.bed_id = nil 
+		student.save!
+		redirect_to :action=>'detail', :id=>params[:student_id]
+	end
+end
+end

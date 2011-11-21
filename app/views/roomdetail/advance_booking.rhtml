@@ -1,0 +1,20 @@
+<h1>Advance Booking</h1>
+<table class=container>
+	<form action='/roomdetail/advance_book_room' method=post>
+	<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" >
+	<input name="bed_id" type="hidden" value="<%= params[:id] %>" >
+	<tr>
+		<td class=column_info>Bed </td>
+		<td>
+		<%= Bed.find(params[:id]).position %>
+		</td>
+	</tr>
+	<tr>
+		<td class=column_info>Amount :</td>
+		<td>
+		<input type=text name=amount />
+		</td>
+	</tr>
+	<tr><td colspan=2 align=center><input type=submit value="Book Room" /></td></tr>
+	</form>
+</table>

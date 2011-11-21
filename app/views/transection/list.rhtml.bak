@@ -1,0 +1,40 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>Transection List</TITLE>
+
+</HEAD>
+
+<BODY>
+<table>
+<tr><td colspan=2 class=header_info>Get Transection List</td></tr>
+<form action='/transection/searchResult' method=post>
+	<tr>
+		<td>Starting Date</td>
+		<td><input type=text name=start_date /></td>
+	</tr>
+	<tr>
+		<td>Ending Date</td>
+		<td><input type=text name=end_date /></td>
+	</tr>
+	<tr>
+		<td>Conserned Person</td>
+		<td><input type=text name=end_date /></td>
+	</tr>
+	<tr>
+		<td>Building wise</td>
+		<td><select name=building_id>
+			<option id=1>Building 1</option>
+			<option id=1>Building 2</option>
+			<option id=1>Building 3</option>
+		   </select>
+		</td>
+	</tr>
+	<tr>
+		<td colspan=2 align=center><input type=submit value="View Payment"</td>
+	</tr>
+</form>
+</table>
+
+</BODY>
+</HTML>

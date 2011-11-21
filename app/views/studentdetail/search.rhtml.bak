@@ -1,0 +1,7 @@
+<h1>Search details by Students Name</h1>
+<table class=container>
+	<form action='/studentdetail/search_result' method=post>
+	<tr><td class=column_info>Name </td><td><input type=text name=student_name />
+	<tr><td colspan=2 align=center><input type=submit value="Search" /></td></tr>
+	</form>
+</table>

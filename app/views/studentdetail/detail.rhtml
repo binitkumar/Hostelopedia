@@ -1,0 +1,202 @@
+<h1>Student Details</h1>
+<table class=container>
+	<tr>
+		<td class=column_info>Name</td>
+		<td><%= @student.name %></td>
+		<td rowspan=7 colspan=2><%= image_tag @student.profile_photo.url,:width=> "200px",:height=>"200px" %></td>
+	</tr>
+	<tr>
+		<td class=column_info>Address</td>
+		<td><%= @student.permanent_address %></td>
+	</tr>
+	<tr>
+		<td class=column_info>Phone No.</td>
+		<td><%= @student.phone_no %></td>
+	</tr>
+	<tr>
+		<td class=column_info>Work Phone No.</td>
+		<td><%= @student.work_phone_no %></td>
+	</tr>
+	<tr>
+		<td class=column_info>E Mail ID</td>
+		<td><%= @student.email %></td>
+	</tr>
+	<tr>
+		<td class=column_info>Purpose</td>
+		<td><%= @student.purpose_of_visit %></td>
+	</tr>
+	<tr>
+		<td class=column_info>Status</td>
+		<td><%= @student.status %></td>
+	</tr>
+	<% if @student.status == "Vacating"%>
+	<tr style="font-weight:bold">
+		<td class=column_info>Vacating Date :</td>
+		<td><%= VacatingNotice.find(:first,:conditions=>["student_id=?", @student.id ]).exit_date.strftime('%d/%m/%y') %></td>
+	</tr>
+	<% end %>
+	<tr>
+		<td class=column_info>Comments</td>
+		<td><%= @student.comment %></td>
+		<td class=column_info>Joined On </td>
+		<td><%= @student.created_at.strftime('%d/%m/%Y').to_s %></td>
+	</tr>
+	<tr>
+		<td class=column_info>Monthly Rental</td>
+		<td><%= @student.monthly_rent %></td>
+		<td class=column_info>Marked:</td>
+		<% if @student.flag %>
+			<td>Yes <form action='/studentdetail/flag' >
+						<input type=hidden name=id value=<%=@student.id%> />
+						<input type=submit value=Unmark class=submitter />
+					</form>
+			</td>
+		<% else %>
+			<td>No <form action='/studentdetail/flag' >
+					<input type=hidden name=id value=<%=@student.id%> />
+					<input type=submit value=Mark class=submitter />
+					</form>
+			</td>
+		<% end %>
+	</tr>
+	<tr>
+		<td class=column_info>Caution Paid</td>
+		<td><%= @student.advance_amount %></td>
+		<td colspan=2><a class=detail_link href='/studentdetail/attach_doc/<%=params[:id]%>' >Attached Document</a> 
+		</td>
+	</tr>
+	<% if @student.status != 'Vacated' %>
+	<form action='/studentdetail/action' method=post>
+	<tr>
+		<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" >
+		<input name="student_id" type="hidden" value="<%= @student.id %>" >
+		<td class=column_info>Action</td>
+		
+		<td name=submitButt>
+			<select id=action_selector name=student_action>
+			<option value=2>Deposite Rent</option>
+			<option value=3>Put vacating notice</option>
+			<option value=4>Change Room</option>
+			<option value=5>Vacate Room</option>
+			<option value=1>Generate ID Card</option>
+			</select>
+		</td>
+		<td colspan=2><table style="border:0px"><tr>
+		<td id=column_info class=vacating_notice style="display:none">
+			<input type=text name=vacating_date readonly="readonly" id=datepicker><br>
+			<input type=submit value=Submit class=submitter />
+		</td>
+		
+		<td id=column_info class=change_room style="display:none">
+			New Bed :&nbsp;&nbsp;&nbsp;
+			<select name=bed>
+			<% @building = Building.find(:all,:conditions=>["user_id=?",current_user.id]) %>
+			<% @building.each do |bld|%>
+				<% @floor = Floor.find(:all,:conditions=>["building_id=?", bld.id]) %>
+					<% @floor.each do |flr|%>
+						<% @room = Room.find(:all,:conditions=>["floor_id=?", flr.id]) %>
+							<% @room.each do |rm|%>
+								<% if rm.vacant_beds.count > 0 %>
+										<option value=<%= (rm.vacant_beds[0]).id %> ><%= bld.name+", "+flr.name+", "+rm.name %></option>
+								<% end %>	
+							<% end %>
+					<% end %>
+			<% end %>
+			</select>
+			<input type=submit value=Submit  class=submitter />
+		</td>
+		
+		<td class=rent_amount style="display:none">
+			Amount :<input type=text name=rent size=5px /><br>
+			Month :&nbsp;&nbsp;
+			<select id=rent_month name=month>
+			<option value=January>January</option>
+			<option value=February>Febuary</option>
+			<option value=March>March</option>
+			<option value=April>April</option>
+			<option value=May>May</option>
+			<option value=June>June</option>
+			<option value=July>July</option>
+			<option value=August>August</option>
+			<option value=September>September</option>
+			<option value=October>October</option>
+			<option value=November>November</option>
+			<option value=December>December</option>
+			</select>
+			Year : &nbsp;&nbsp;
+			<select name=year id = rent_year>
+			<option value=2007>2007</option>
+			<option value=2008>2008</option>
+			<option value=2019>2009</option>
+			<option value=2010>2010</option>
+			<option value=2011 selected=true>2011</option>
+			<option value=2012>2012</option>
+			<option value=2013>2013</option>
+			<option value=2014>2014</option>
+			</select>
+			<input type=submit value=Submit  class=submitter />
+		</td>
+		
+		<td class=vacate_room  style="display:none">
+			<input type=submit value=Submit  class=submitter />
+		</td>
+		<td class=generate_id  style="display:none">
+			<input type=submit value=Submit  class=submitter />
+		</td>
+		</tr></table></td>
+	</tr>
+	<% end %>
+	<tr><td colspan=2 align=center class=header_info>Transection Details</td><td colspan=2><a class=detail_link href="#" id="trans_toggle">Show</a></td></tr>
+	<tr class=trans_details style="display:none"><td class=column_info>Date</td><td class=column_info>Month</td><td class=column_info>Amount</td><td class=column_info>Details</td></tr>
+	<% @transections.each do |trans|%>
+	<tr class=trans_details style="display:none"><td><%= trans.created_at.to_date.strftime('%d/%m/%y') %></td><td><%= trans.rent_month %></td><td><%= trans.amount %></td><td><%= trans.details %></td></tr>
+	<% end %>
+</table>
+<script language=javascript>
+$('#trans_toggle').click(function(){
+	if ( $('.trans_details').css("display") == "table-row" ){
+		$('#trans_toggle').text("Show");
+		$('.trans_details').css("display","none");
+	}else{
+	$('#trans_toggle').text("Hide");
+	$('.trans_details').css("display","table-row");	
+	}
+});
+$().ready(function(){
+	$('#datepicker').datePicker();
+	$('.rent_amount').css("display","block");
+});
+$('#action_selector').change(function(){
+	if( $('#action_selector').val() == 1 ){
+		$('.generate_id').css("display","block");
+		$('.vacating_notice').css("display","none");
+		$('.change_room').css("display","none");
+		$('.vacate_room').css("display","none");
+		$('.rent_amount').css("display","none");
+	} else if( $('#action_selector').val() == 2 ){
+		$('.generate_id').css("display","none");
+		$('.vacating_notice').css("display","none");
+		$('.change_room').css("display","none");
+		$('.vacate_room').css("display","none");
+		$('.rent_amount').css("display","block");
+	} else if( $('#action_selector').val() == 3 ){
+		$('.generate_id').css("display","none");
+		$('.rent_amount').css("display","none");
+		$('.change_room').css("display","none");
+		$('.vacate_room').css("display","none");
+		$('.vacating_notice').css("display","block");
+	} else if( $('#action_selector').val() == 4 ){
+		$('.generate_id').css("display","none");
+		$('.rent_amount').css("display","none");
+		$('.vacating_notice').css("display","none");
+		$('.vacate_room').css("display","none");
+		$('.change_room').css("display","block");
+	} else if( $('#action_selector').val() == 5 ){
+		$('.generate_id').css("display","none");
+		$('.rent_amount').css("display","none");
+		$('.vacating_notice').css("display","none");
+		$('.vacate_room').css("display","block");
+		$('.change_room').css("display","none");
+	}
+});
+</script>

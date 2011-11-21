@@ -1,0 +1,22 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE> Room Details </TITLE>
+</HEAD>
+
+<BODY>
+<h1>Room Details</h1>
+<table>
+	<tr>
+		<td class=header_info>No.</td>
+		<td  class=header_info>Name</td>
+		<td  class=header_info>Status</td>
+	</tr>
+	<tr>
+		<td>1</td>
+		<td>Student 1</td>
+		<td>Continuous</td>
+	</tr>
+</table>
+</BODY>
+</HTML>

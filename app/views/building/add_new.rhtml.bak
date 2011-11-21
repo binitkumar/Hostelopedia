@@ -1,0 +1,23 @@
+<h1> Add New Building</h1>
+<table class=container>
+	<tr>
+		<td colspan=2 align=center class=header_info>New Bulding Details</td>
+	</tr>
+	<form action='/building/add' method=post>
+	<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" >
+	<tr>
+		<td>Name</td>
+		<td><input type=text name=building_name />
+	</tr>
+	<tr>
+		<td>Address</td>
+		<td><textarea name=building_address></textarea></td>
+	</tr>
+	<tr>
+		<td>Security Guard</td>
+		<td><input type=text name=building_security_guard /></td>
+		<input type=hidden name=owner_id value= <%= current_user['id'] %> >
+	</tr>
+	<tr><td colspan=2 align=center><input type=Submit value="Add Bulding" />
+	</form>
+</table>

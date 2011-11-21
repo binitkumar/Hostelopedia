@@ -1,0 +1,37 @@
+<h1>New Student Registration</h1>
+<%= form_for :student, @student, :url=> '/studentdetail/adding_student' , :html => { :multipart => true } do |f| %>
+<table class=container>	
+	<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" >
+	<tr><td class=column_info><%= f.label :name, 'Name' %></td>
+	     <td><%= f.text_field :name %></td></tr>
+	<%= f.hidden_field :bed_id, :value=>params[:id] %>
+	<tr><td class=column_info><%= f.label :qualification, 'Qualification' %></td>
+	     <td><%= f.text_field :qualification %></td></tr>
+
+	<tr><td class=column_info><%= f.label :purpose_of_visit, 'Purpose_of_visit' %></td>
+	     <td><%= f.text_field :purpose_of_visit %></td></tr>
+
+	<tr><td class=column_info><%= f.label :permanent_address, 'Permanent Address' %></td>
+	     <td><%= f.text_field :permanent_address %></td></tr>
+
+	<tr><td class=column_info><%= f.label :monthly_rent, 'Monthly Rental' %></td>
+	     <td><%= f.text_field :monthly_rent %></td></tr>
+
+	<tr><td class=column_info><%= f.label :advance_amount, 'Advance Amount' %></td>
+	     <td><%= f.text_field :advance_amount %></td></tr>
+	
+	<tr><td class=column_info><%= f.label :comment, 'Comment' %></td>
+	     <td><%= f.text_area :comment %></td></tr>
+	
+	<tr><td class=column_info><%= f.label :flag, 'Flag' %></td>
+	     <td><%= f.check_box :flag %></td></tr>
+	
+	<tr><td class=column_info><%= f.label :profile_photo, 'Profile Image' %></td>
+	     <td><%= f.file_field :profile_photo %></td></tr>
+	
+	<tr><td class=column_info><%= f.label :document_photo, 'Document Image' %></td>
+	     <td><%= f.file_field :document_photo %></td></tr>
+	
+	<tr><td colspan=2><%= f.submit %></td>
+</table>
+<% end %>

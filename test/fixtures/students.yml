@@ -1,0 +1,21 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  qualification: MyString
+  purpose_of_visit: MyString
+  permanent_address: MyString
+  monthly_rent: 1
+  advance_amount: 1
+  comment: MyString
+  flag: false
+
+two:
+  name: MyString
+  qualification: MyString
+  purpose_of_visit: MyString
+  permanent_address: MyString
+  monthly_rent: 1
+  advance_amount: 1
+  comment: MyString
+  flag: false

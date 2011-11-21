@@ -1,0 +1,37 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html charset=iso-8859-1" />
+<meta http-equiv="Content-Language" content="en-us" />
+<%= stylesheet_link_tag "style" %>
+<%= csrf_meta_tag %>
+</head>
+<body id="rails-list">
+<table width=100% height=100%>
+<tr><td colspan=2 height=100px style="border-bottom:1px solid black" align=center><h1>E-Hostel Management System</h1></td></tr>
+<tr><td width=150px valign="top" style="border-right:1px solid black">  
+        <div id="sidebar">
+        <table width=100%>
+	<tr><td><%= link_to 'Home','/building/list' %>
+	<tr><td><%= link_to 'Building Management','#' %>
+	<tr><td><%= link_to 'Add Building','/building/add' %>
+	<tr><td><%= link_to 'Edit Building','/building/edit' %>
+	<tr><td><%= link_to 'Change Owner of Building','/building/change_owner' %>
+	<tr><td><%= link_to 'Search','#' %></td></tr>
+        <tr><td><%= link_to 'Room Search','/roomdetail/search' %></td></tr>
+	<tr><td><%= link_to 'Student Search' ,'/studentdetail/search' %></td></tr>
+	<tr><td><%= link_to 'Transection Management' ,'#' %></td></tr>
+	<tr><td><%= link_to 'View Transections' ,'/transection/list' %></td></tr>
+	<tr><td><%= link_to 'Incomes' ,'/transection/income' %></td></tr>
+	<tr><td><%= link_to 'Payments' ,'/transection/payment' %></td></tr>
+	<tr><td><%= link_to 'Reminder' ,'/reminder/days_reminder' %></td></tr>
+        </table>
+        </div>
+    </td>
+    <% session[:last_access] = Time.new %>
+    <td valign="top" align="middle">
+                <%= yield -%>
+    </td>
+</tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<h1>Change Ownership of Building</h1>
+<table class=container>
+<tr><td colspan=2 class=header_info>Provide buiding and new owner detail</td></tr>
+<form action='/building/modify_owner' method=post>
+<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" >
+<tr>
+	<td class=column_info>Building Name </td>
+	<% @build = my_buildings %>
+	<td><% if @build.nil? %>
+				No Building available.
+		<% else %>
+		<select name=building_id>
+			<% @build.each do | bld |%>
+				<option value=<%= bld.id %> ><%= bld.name %></option>
+			<% end %>
+		</select>
+		<% end %>
+	</td>
+</tr>
+<tr>
+	<td class=column_info>New Owner</td>
+	<td><select name=new_owner_id>
+		<% @user = User.find(:all) %>
+		<% @user.each do |usr|%>
+			<option value=<%= usr.id %> ><%= usr.email %></option>
+		<% end%>
+		</select>
+	</td>
+</tr>
+<% if ! @build.nil? %>
+<tr>
+	<td colspan=2>
+		<input type=submit value="Change Owner" class=submitter />
+	</td>
+</tr>
+<% end %>
+</form>
+</table>
