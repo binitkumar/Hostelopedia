@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111121190355) do
+ActiveRecord::Schema.define(:version => 20111121210317) do
 
   create_table "add_phone_no_to_students", :force => true do |t|
     t.integer  "phone_no"
@@ -30,6 +30,10 @@ ActiveRecord::Schema.define(:version => 20111121190355) do
     t.float    "longitude"
     t.boolean  "gmaps"
     t.string   "address_line_one"
+    t.integer  "hostel_id"
+    t.string   "name"
+    t.string   "contact_person"
+    t.string   "contact_no"
   end
 
   create_table "advance_bookings", :force => true do |t|
@@ -71,6 +75,7 @@ ActiveRecord::Schema.define(:version => 20111121190355) do
     t.string   "contact_no"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "address_id"
   end
 
   create_table "random_reminders", :force => true do |t|
