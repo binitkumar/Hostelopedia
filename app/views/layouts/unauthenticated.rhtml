@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html>
-<head>
+<head><link rel="shortcut icon" href="../images/favicon.png" />
   <title>Hostelopedia</title>
   
   <%= stylesheet_link_tag "datePicker" %>
@@ -51,8 +51,8 @@
           <div class="sidebar_item">
             <h3>Search Hostel</h3>
 			<hr><br>
-			<form action="#" method=post>
-			City :&nbsp;&nbsp;&nbsp;<select name=city>
+			<form action="" method=post>
+			City :<select name=city id=city_select>
 				<option value='Hyderabad'>Hyderabad</option>
 				<option value='Chennai'>Chennai</option>
 				<option value='Mumbai'>Mumbai</option>
@@ -60,13 +60,10 @@
 				<option value='Kolkata'>Kolkata</option>
 				<option value='Delhi'>Delhi</option>
 			</select><br><br>
-			Area : &nbsp;&nbsp;&nbsp;<select name=area>
-				<option value=xxx>XXX</option>
-				<option value=xxx>XXX</option>
-				<option value=xxx>XXX</option>
-				<option value=xxx>XXX</option>
+			Area :<select name=area id=addressStreet>
+				<option value="">Select City</option>
 			</select><br><br>
-			<input type=submit value=Search class=submitter><a href="#">Advanced search</a>
+			<input type=submit value=Search class=submitter><a href="under_construction.html">Advanced search</a>
 			</form>
           </div>
           <div class="sidebar_base"></div>
@@ -78,8 +75,10 @@
             <h3>Hostelopedia Updates</h3>
 			<hr><br>
 			<ul>
-				<li><a href='#'>Suggest a Hostel</a></li>
-				<li><a href='#'>Hostelopedia Events</a></li>
+				<li><a href='under_construction.html'>About Us</a></li>
+				<li><a href='under_construction.html'>Suggest a Hostel</a></li>
+				<li><a href='under_construction.html'>Hostelopedia Events</a></li>
+				<li><a href='under_construction.html'>Contact Us</a></li>
 			</ul>
           </div>
           <div class="sidebar_base"></div>
@@ -89,12 +88,12 @@
           <div class="sidebar_top"></div>
           <div class="sidebar_item">
             <!-- insert your sidebar items here -->
-            <h3>Other Services</h3>
+            <h3>Others</h3>
 			<hr><br>
 			<ul>
-				<li><a href='#'>Career Caunselling</a></li>
-				<li><a href='#'>Resume Building</a></li>
-				<li><a href='#'>Coching Search</a></li>
+				<li><a href='under_construction.html'>Career Caunselling</a></li>
+				<li><a href='under_construction.html'>Resume Building</a></li>
+				<li><a href='under_construction.html'>Coching Search</a></li>
 			</ul>
           </div>
           <div class="sidebar_base"></div>
@@ -115,10 +114,17 @@
 </body>
 </html>
 <script language=javascript>
-jQuery('#building_selector').change(function(){
-	value = jQuery('#building_selector').val();
-	if (value != 0){
-		jQuery('#quick_navigator').submit();
-	}
-});
+jQuery(function($) {
+  // when the #country field changes
+  $("#city_select").change(function() {
+    // make a POST call and replace the content
+    var city = $('select#city_select :selected').val();
+    if(city == "") city="0";
+    jQuery.get('/home/update_street/' + city, function(data){
+        $("#addressStreet").html(data);
+    })
+    return false;
+  });
+
+})
 </script>

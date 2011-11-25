@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111121210317) do
+ActiveRecord::Schema.define(:version => 20111124204939) do
 
   create_table "add_phone_no_to_students", :force => true do |t|
     t.integer  "phone_no"
@@ -31,9 +31,6 @@ ActiveRecord::Schema.define(:version => 20111121210317) do
     t.boolean  "gmaps"
     t.string   "address_line_one"
     t.integer  "hostel_id"
-    t.string   "name"
-    t.string   "contact_person"
-    t.string   "contact_no"
   end
 
   create_table "advance_bookings", :force => true do |t|
@@ -73,9 +70,19 @@ ActiveRecord::Schema.define(:version => 20111121210317) do
     t.string   "name"
     t.string   "contact_person"
     t.string   "contact_no"
+    t.integer  "address_id"
+    t.string   "food_service"
+    t.float    "standard_level"
+    t.text     "notes"
+    t.integer  "representative_id"
+    t.date     "data_collection_date"
+    t.string   "varification_status"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "address_id"
+    t.string   "profile_photo_file_name"
+    t.string   "profile_photo_content_type"
+    t.integer  "profile_photo_file_size"
+    t.datetime "profile_photo_updated_at"
   end
 
   create_table "random_reminders", :force => true do |t|
@@ -100,6 +107,17 @@ ActiveRecord::Schema.define(:version => 20111121210317) do
   create_table "rooms", :force => true do |t|
     t.string   "name"
     t.integer  "floor_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "services", :force => true do |t|
+    t.integer  "hostel_id"
+    t.integer  "total_seats"
+    t.integer  "vacant_seats"
+    t.integer  "sharing"
+    t.integer  "rent_amount"
+    t.integer  "caution_deposite"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

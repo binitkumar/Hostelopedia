@@ -1,0 +1,4 @@
+<%= collection_select(nil, :city, @citys, :city, :city,
+                     {:prompt   => "Select an City"},
+                     {:onchange => "#{remote_function(:url  => {:action => "update_streets"},
+                                                      :with => "'city_name='+value")}"}) %>

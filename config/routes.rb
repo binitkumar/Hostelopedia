@@ -1,4 +1,8 @@
 Hostelopedia::Application.routes.draw do
+  get "hostel/profile"
+
+  get "collaborators/show"
+
   devise_for :users 
   devise_for :users, :controllers => { :sessions => "sessions" }
   devise_for :users do get 'logout' => 'devise/sessions#destroy' end

@@ -1,0 +1,2 @@
+module HostelHelper
+end

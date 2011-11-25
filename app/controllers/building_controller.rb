@@ -1,5 +1,5 @@
 class BuildingController < ApplicationController
-before_filter :authenticate_user!, :varify_role
+	before_filter :authenticate_user!, :varify_role
 	layout 'standard'
 	def navigator
 		url = '/building/detail/'+params[:building_id]
@@ -101,7 +101,7 @@ before_filter :authenticate_user!, :varify_role
 		redirect_to :action=>'list'
 	end
 	def varify_role
-		if !(current_user.role_id == 3 || current_user.role_id == 4)
+		if !(current_user.role_id == 5 || current_user.role_id == 4)
 			redirect_to '/'
 		end
 	end

@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  hostel_id: 1
+  total_seats: 1
+  vacant_seats: 1
+  sharing: 1
+  rent_amount: 1
+  caution_deposite: 1
+
+two:
+  hostel_id: 1
+  total_seats: 1
+  vacant_seats: 1
+  sharing: 1
+  rent_amount: 1
+  caution_deposite: 1

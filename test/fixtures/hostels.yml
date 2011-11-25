@@ -1,0 +1,25 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  contact_person: MyString
+  contact_no: MyString
+  address_id: 1
+  food_service: MyString
+  standard_level: 1.5
+  notes: MyText
+  representative_id: 1
+  data_collection_date: 2011-11-24
+  varification_status: 
+
+two:
+  name: MyString
+  contact_person: MyString
+  contact_no: MyString
+  address_id: 1
+  food_service: MyString
+  standard_level: 1.5
+  notes: MyText
+  representative_id: 1
+  data_collection_date: 2011-11-24
+  varification_status: 

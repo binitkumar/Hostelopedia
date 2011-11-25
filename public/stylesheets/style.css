@@ -19,7 +19,7 @@ img
 
 h1, h2, h3, h4, h5, h6 
 { font: normal 175% 'century gothic', arial, sans-serif;
-  color: #43423F;
+  color: #B60000;
   margin: 0 0 5px 0;
   padding: 2px 0 2px 0;}
 
@@ -317,9 +317,10 @@ ul#menu li a:hover
 table
 {
   #margin: 2px 0 2px 0;
-  border: solid 1px black;}
+  border: solid 1px #B60000;}
 
 .container{
+	width:100%;
 	cellpadding:0;
 	cellspacing:0;
 	margin-left:auto;
@@ -365,7 +366,7 @@ td.column_info
   }
   
 a.vacant 
-{ font: bold 120% 'century gothic', arial, sans-serif;
+{ font: normal 120% 'century gothic', arial, sans-serif;
   color: black;
   margin: 0 0 2px 0;
   padding: 2px 0 2px 0;
@@ -490,7 +491,7 @@ a.logout:hover
  background-image: url('../images/submit_button.gif');
  background-repeat: repeat-x;
  text-align: center ;
- border : solid black 1px;
+ //border : solid black 1px;
  display: block;
  cursor: pointer;
  }
@@ -520,7 +521,7 @@ a.logout:hover
 
 .gmaps4rails_map {
   width: 650px;
-  height: 400px;
+  height: 500px;
 }
 
 .bing_map {
@@ -528,6 +529,6 @@ a.logout:hover
    top: 20;
    left: 10;
    width: 400px;
-   height: 400px;
+   height: 600px;
    border:#555555 2px solid;
 }

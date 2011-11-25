@@ -1,0 +1,33 @@
+<h1>Hostel profile</h1>
+<table class=container>
+	<tr>
+		<td class=column_info>Hostel Name</td>
+		<td><%= @hostel.name %></td>
+		<td rowspan=7 colspan=2><%= image_tag @hostel.profile_photo.url,:width=> "200px",:height=>"200px" %></td>
+	</tr>
+	<tr>
+		<td class=column_info>Address</td>
+		<td><%= @hostel.address.full_address %></td>
+	</tr>
+	<tr>
+		<td class=column_info>Contact Person</td>
+		<td><%= @hostel.contact_person %></td>
+	</tr>
+	<tr>
+		<td class=column_info>Contact No. </td>
+		<td><%= @hostel.contact_no %></td>
+	</tr>
+	<tr>
+		<td class=column_info>Food Service</td>
+		<td><%= @hostel.food_service %></td>
+	</tr>
+	<tr>
+		<td class=column_info>Hostelopedia Notes :</td>
+		<td><%= @hostel.notes %></td>
+	</tr>
+	<tr>
+		<td class=column_info>Hostelopedia Rating :</td>
+		<td><%= @hostel.standard_level %></td>
+	</tr>
+</table>
+
