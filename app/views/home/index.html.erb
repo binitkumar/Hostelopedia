@@ -14,7 +14,7 @@
 	Your Location : <select name=location onchange="submit_form();">
 						<%= @option %>
 					</select>
-	Area : <select name=area onchange="submit_form();">
+	Area : <select id=area_semi name=area onchange="submit_form();">
 			<%= @options.html_safe %>
 			</select>
 	</form>
@@ -33,4 +33,7 @@
 function submit_form(){
 	$("#form_filter").submit();
 }
+$(document).ready(function(){
+	$("#area_semi").val("<%=params[:area]%>").attr("selected",true);
+});
 </script>
