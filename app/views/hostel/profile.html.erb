@@ -15,7 +15,7 @@
 	</tr>
 	<tr>
 		<td class=column_info>Contact No. </td>
-		<td><%= @hostel.contact_no %></td>
+		<td><%= @hostel.contact_no %><a title="Brocken Contact no ? Ask hostelopedia for new number." href='/hostel/contact_us'>Not working ?</a></td>
 	</tr>
 	<tr>
 		<td class=column_info>Food Service</td>
@@ -28,6 +28,25 @@
 	<tr>
 		<td class=column_info>Hostelopedia Rating :</td>
 		<td><%= @hostel.standard_level %></td>
+	</tr>
+	<tr>
+	<td colspan=3>
+		<table width=100%>
+		<tr>
+			<td class=header_info>Total</td>
+			<td class=header_info>Vacant</td>
+			<td class=header_info>Sharing</td>
+			<td class=header_info>Rent</td>
+			<td class=header_info>Caution Deposite</td>
+		</tr>
+		<% @hostel.services.each do |serv|%>
+			<tr><td class=column_info><%= serv.total_seats %></td><td class=column_info><%= serv.vacant_seats %></td><td class=column_info><%= serv.sharing %></td><td class=column_info><%= serv.rent_amount %></td><td class=column_info><%= serv.caution_deposite %></td></tr>
+		<% end%>
+		<% if @hostel.services.size == 0 %>
+			<tr><td class=column_info colspan=5><br>Service Information not available.<a title="Ask for detailed information to hostelopedia." href='/hostel/contact_us'>Request service info.</a></td></tr>
+		<% end %>
+		</table>
+	</td>
 	</tr>
 </table>
 

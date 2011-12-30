@@ -346,7 +346,7 @@ table tr td
   padding: 2px 0 2px 0;}
 
 td.column_info 
-{ font: bold 'century gothic', arial, sans-serif;
+{ font: 'century gothic', arial, sans-serif;
   color: #B60000;
   margin: 0 0 2px 0;
   padding: 2px 0 2px 0;}
@@ -362,7 +362,7 @@ td.column_info
 { 
   margin: 0 0 2px 0;
   padding: 2px 0 2px 0;
-  background: #ff0000 
+  background: #ff00ff 
   }
   
 a.vacant 
@@ -370,7 +370,7 @@ a.vacant
   color: black;
   margin: 0 0 2px 0;
   padding: 2px 0 2px 0;
-  background: #ff0000 
+  background: #ff00ff 
   }
  td.noticed 
 { font: bold 'century gothic', arial, sans-serif;

@@ -1,0 +1,36 @@
+<h1>Are you looking for hostels ...</h1>
+<div style="border:1px solid">
+	<div id=gmap style="text-align:center;border:1px solid black"><a href='/home/gmap_view'><h2>Switch to GMap View</h2></a></div>
+	<div id=area style="text-align:right">
+	<form action = '/home/index' method=post id=form_filter>
+<!--div>	Hostel Type :  
+			<select name=hostel_type>
+				<option value="Men's Hostel">Men's Hostel</option>
+				<option value="Ladie's Hostel">Ladies's Hostel</option>
+				<option value="Paying Guest">Paying Guest</option>
+				<option value="Mension">Mension</option>
+				<option value="Low Cost Hotel">Low Cost Hotel</option>
+			</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </div -->
+	Your Location : <select name=location onchange="submit_form();">
+						<%= @option %>
+					</select>
+	Area : <select name=area onchange="submit_form();">
+			<%= @options.html_safe %>
+			</select>
+	</form>
+	</div>
+	<div id=area style="text-align:right">
+	<table class=container>
+	<tr><td colspan=4 style="text-align:right"><%= will_paginate @addresses %></td></tr>
+	<tr><td class=header_info>Hostel Name </td><td class=header_info>Address</td><td class=header_info>Contact No.</td><td  class=header_info>Details</td></tr>
+	<% @addresses.each do | addr | %>
+	<tr><td><%= addr.hostel.name %></td><td><%= addr.full_address %></td><td><%= addr.hostel.contact_no %></td><td><%= "<a href='/hostel/profile/#{addr.hostel.id}'>View profile</a>".html_safe %></td></tr>
+	<% end %>
+	</table>
+	</div>
+</div>
+<script>
+function submit_form(){
+	$("#form_filter").submit();
+}
+</script>

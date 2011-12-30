@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
-<head><link rel="shortcut icon" href="../images/favicon.png" />
-  <title>Hostelopedia - Search & Manage in indian cities</title>
+<head><link rel="shortcut icon" href="../../images/favicon.png" />
+  <title>Hostelopedia - Search Hostels in indian cities</title>
   
   <%= stylesheet_link_tag "datePicker" %>
   <%= javascript_include_tag :defaults %>
@@ -39,7 +39,7 @@
 	<% end -%>
 
           <!-- class="logo_colour", allows you to change the colour of the text -->
-          <h1><a href="#">Hostelopedia<span class="logo_colour">  Services</span></a></h1>
+          <h1><a href="/">Hostelopedia<span class="logo_colour">  Services</span></a></h1>
           <h2>With you, always.</h2>
         </div>
       </div>
@@ -51,8 +51,8 @@
           <div class="sidebar_item">
             <h3>Search Hostel</h3>
 			<hr><br>
-			<form action="" method=post>
-			City :<select name=city id=city_select>
+			<form action="/home/index" method=post>
+			City :<select name=location id=city_select>
 				<option value=''>Select City</option>
 				<option value='Hyderabad'>Hyderabad</option>
 				<option value='Chennai'>Chennai</option>
@@ -76,10 +76,10 @@
             <h3>Hostelopedia Updates</h3>
 			<hr><br>
 			<ul>
-				<li><a href='under_construction.html'>About Us</a></li>
-				<li><a href='under_construction.html'>Suggest a Hostel</a></li>
-				<li><a href='under_construction.html'>Hostelopedia Events</a></li>
-				<li><a href='under_construction.html'>Contact Us</a></li>
+				<li><a href='/hostel/about_us'>About Us</a></li>
+				<li><a href='/hostel/suggest_hostel'>Suggest a Hostel</a></li>
+				<li><a href='/hostel/events'>Hostelopedia Events</a></li>
+				<li><a href='/hostel/contact_us'>Contact Us</a></li>
 			</ul>
           </div>
           <div class="sidebar_base"></div>
@@ -88,14 +88,14 @@
 	<div class="sidebar">
           <div class="sidebar_top"></div>
           <div class="sidebar_item">
-            <!-- insert your sidebar items here -->
+            <!-- insert your sidebar items here >
             <h3>Others</h3>
 			<hr><br>
 			<ul>
 				<li><a href='under_construction.html'>Career Caunselling</a></li>
 				<li><a href='under_construction.html'>Resume Building</a></li>
 				<li><a href='under_construction.html'>Coching Search</a></li>
-			</ul>
+			</ul-->
           </div>
           <div class="sidebar_base"></div>
         </div>

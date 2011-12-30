@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111124204939) do
+ActiveRecord::Schema.define(:version => 20111230212936) do
 
   create_table "add_phone_no_to_students", :force => true do |t|
     t.integer  "phone_no"
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(:version => 20111124204939) do
     t.boolean  "gmaps"
     t.string   "address_line_one"
     t.integer  "hostel_id"
+    t.string   "status"
   end
 
   create_table "advance_bookings", :force => true do |t|
@@ -59,6 +60,13 @@ ActiveRecord::Schema.define(:version => 20111124204939) do
     t.integer  "user_id"
   end
 
+  create_table "contact_us", :force => true do |t|
+    t.string   "email"
+    t.string   "message"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "floors", :force => true do |t|
     t.string   "name"
     t.integer  "building_id"
@@ -83,6 +91,8 @@ ActiveRecord::Schema.define(:version => 20111124204939) do
     t.string   "profile_photo_content_type"
     t.integer  "profile_photo_file_size"
     t.datetime "profile_photo_updated_at"
+    t.string   "hostel_type"
+    t.string   "status"
   end
 
   create_table "random_reminders", :force => true do |t|

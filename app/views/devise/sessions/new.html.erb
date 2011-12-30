@@ -16,3 +16,8 @@
 
 <%= render :partial => "devise/shared/links" %>
 </td></tr></table>
+<script>
+$(document).ready(function() {
+    $('form:first *:input[type!=hidden]:first').focus();
+});
+</script>

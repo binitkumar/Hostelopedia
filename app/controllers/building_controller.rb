@@ -105,4 +105,24 @@ class BuildingController < ApplicationController
 			redirect_to '/'
 		end
 	end
+	def delete_bed
+		room =  Bed.find(params[:id].to_i).room
+		Bed.find(params[:id].to_i).destroy
+		redirect_to :action=>'editor' ,:id=>room.floor.building.id
+	end
+	def delete_room
+		floor = Room.find(params[:id].to_i).floor
+		Room.find(params[:id].to_i).destroy
+		redirect_to :action=>'editor' ,:id=>floor.building.id
+		
+	end
+	def delete_floor
+		building = Floor.find(params[:id].to_i).building
+		Floor.find(params[:id].to_i).destroy
+		redirect_to :action=>'editor' ,:id=>building.id
+	end
+	def delete_building
+		Building.find(params[:id].to_i).destroy
+		redirect_to '/building/list'
+	end
 end

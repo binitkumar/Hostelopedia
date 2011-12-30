@@ -1,0 +1,109 @@
+<h1>Hostel Details</h1>
+<form action='/hostel/edit_hostel' method=post enctype=multipart/form-data >
+<table class=container>
+
+	<% if !flash[:message].nil? %>
+	<tr><td colspan=2 class=column_info><%= flash[:message] %></td></tr>
+	<% end %>
+	<tr>
+		<td class=column_info>Hostel Name :</td>
+		<td><input type=text name=hostel_name value="<%= @hostel.name %>" ></td>
+	</tr>
+	<tr>
+		<td class=column_info>Address :</td>
+		<td>Line 1&nbsp;&nbsp;&nbsp;:<input type=text name=address_line_one value="<%= @hostel.address.address_line_one %>" ><br>
+			<br>Street&nbsp;&nbsp; :<input type=text name=street value="<%= @hostel.address.street %>" ><br>
+			<br>City&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :<input type=text name=city value="<%= @hostel.address.city %>" ><br>
+			<br>State&nbsp;&nbsp;&nbsp; :<input type=text name=state value="<%= @hostel.address.state %>" ><br>
+			<br>Country :<input type=text name=country value='India' value="<%= @hostel.address.country %>" >
+		</td>
+	</tr>
+	<tr>
+		<td class=column_info>Contact Person :</td>
+		<td><input type=text name=contact_person value="<%= @hostel.contact_person %>" ></td>
+	</tr>
+	<tr>
+		<td class=column_info>Contact No. :</td>
+		<td><input type=text name=contact_no value="<%= @hostel.contact_no %>"  ></td>
+	</tr>
+	<tr>
+		<td class=column_info>Hostel Type :</td>
+		<td>
+			<select name=hostel_type>
+				<option value="Men's Hostel">Men's Hostel</option>
+				<option value="Ladie's Hostel">Ladies's Hostel</option>
+				<option value="Paying Guest">Paying Guest</option>
+				<option value="Mension">Mension</option>
+				<option value="Low Cost Hotel">Low Cost Hotel</option>
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td class=column_info>Food Service :</td>
+		<td><input type=text name=food_service value="<%= @hostel.food_service %>" ></td>
+	</tr>
+	<tr>
+		<td class=column_info>Notes :</td>
+		<td><textarea name=hostel_notes rows=4 cols=20><%= @hostel.notes %></textarea></td>
+	</tr>
+	<tr>
+		<td class=column_info>Hostelopedia Rating :</td>
+		<td><input type=text name=standard_level value="<%= @hostel.standard_level %>" ></td>
+	</tr>
+	<tr>
+	<td class=column_info>Hostel Image :</td>
+	<td><input type=file name=hostel_photo></td>
+	</tr>
+	<tr>
+	<td colspan=3>
+		<table width=100%>
+		<tr><td colspan=6 class=header_info>Available Room Types</td></tr>
+		<tr>
+			<td class=header_info>Total</td>
+			<td class=header_info>Vacant</td>
+			<td class=header_info>Sharing</td>
+			<td class=header_info>Rent</td>
+			<td class=header_info>Caution Deposite</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr><td colspan=6>
+			<input type=hidden name=service_count id=service_count value="0">
+			<div id=services>
+							<input title="Total number of Beds" type=text name=total0 size=3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input title="Currently vacant beds number" type=text name=vacant0 size=3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input title="How many people are sharing the room" type=text name=sharing0 size=3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input title="Monthly rent amount" type=text name=rent0 size=3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input title="Caution money to take room." type=text name=deposite0 size=3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<img title="Add more Room types" src='../images/add.jpg' id=add_service style="width:30px;height:30px" />
+			</div>
+			</td>
+		</tr>
+		</table>
+	</td>
+	</tr>
+	<tr>
+	<td class=column_info>Status :</td>
+	<td><select name=status>
+		<option value="Varified">Varified</option>
+		<option value="Not Varified"> Not Varified</option>
+		</select>
+	</td>
+	</tr>
+	<tr>
+	<td><input type=submit value="Submit" class=submitter></td><td><input type=reset value="Reset" class=submitter></td>
+	</tr>
+	
+</table>
+</form>
+<script>
+$(document).ready(function() {
+    $('form:second *:input[type=text]:first').focus();
+});
+	i = 0 ;
+$('#add_service').click(function(){
+	i += 1;
+	$('#services').append('<br><br><input title="Total number of Beds" type=text name=total"+i+" size=3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input title="Currently vacant beds number" type=text name=vacant"+i+" size=3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input title="How many people are sharing the room" type=text name=sharing"+i+" size=3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input title="Caution money to take room." type=text name=rent"+i+" size=3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input title="Caution money to take room." type=text name=deposite"+i+" size=3>');
+	$('#service_count').attr('value',i);
+	
+});
+</script>

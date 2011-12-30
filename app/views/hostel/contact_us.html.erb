@@ -1,0 +1,8 @@
+<%= form_for @contact,:url=>{:action=>'save_contact'},:method=>"post" do |f| %>
+<table class=container>
+<tr><td colspan=2 style="text-align:center"><h1>Contact Hostelopedia Team </h1></td></tr>
+<tr><td>Your E Mail ID: </td><td><%= f.text_field :email %></td></tr>
+<tr><td>Message  :</td><td> <%= f.text_area :message,:rows=>5,:cols=>25 %></td></tr>
+<tr><td colspan=2><%= f.submit "Send message",:class=>"submitter" %></td></tr>
+</table>
+<% end %>

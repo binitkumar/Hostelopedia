@@ -1,0 +1,9 @@
+<h1><a href="#">GMap View</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/">List View</a></h1>
+<hr>
+<br>
+<%= gmaps4rails(@json) %>
+<script>
+$(document).ready(function() {
+    $('form:first *:input[type!=hidden]:first').focus();
+});
+</script>

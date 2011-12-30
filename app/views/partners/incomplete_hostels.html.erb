@@ -1,0 +1,12 @@
+<h1>Incomplete Hostels List</h1>
+<div style="border:1px solid">
+	<div id=area style="text-align:right">
+	<table class=container>
+	<tr><td colspan=4 style="text-align:right"><%= will_paginate @addresses %></td></tr>
+	<tr><td class=header_info>Hostel Name </td><td class=header_info>Address</td><td class=header_info>Contact No.</td><td  class=header_info>Edit</td></tr>
+	<% @addresses.each do | addr | %>
+	<tr><td><%= addr.hostel.name %></td><td><%= addr.full_address %></td><td><%= addr.hostel.contact_no %></td><td><%= "<a href='/partners/edit_registrations/#{addr.hostel.id}'>Edit profile</a>".html_safe %></td></tr>
+	<% end %>
+	</table>
+	</div>
+</div>

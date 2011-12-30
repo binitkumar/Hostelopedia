@@ -8,6 +8,9 @@
 	<tr><td>Occupied :</td><td align=left ><%= @current_count %></td></tr>
 	<tr><td colspan=2  class=header_info>Status</td></tr>
 	<tr><td colspan=2><form action="/building/add_floor/<%=@building.id%>"><input type=submit value='Add Floor' class=submitter /></form></td></tr>
+	<% if @floor.size == 0 %>
+		<tr><td colspan=2 class=vacant><%= link_to('Delete Building',"/building/delete_building/#{params[:id]}") %></td></tr>
+	<% end %>
 	<% @floor.each do | floor |%>
 		<tr><td colspan=2 class=header_info><%= floor.name %></td></tr>
 		<tr><td colspan=2 align=center>
@@ -15,10 +18,13 @@
 				<tr>
 				<% room_count = 0 %>
 				<tr><td class=subheader><form action=<%= "/building/add_room/"+floor.id.to_s %> ><input type=submit value="Add Room" class=submitter /></form></td></tr>
+				<% if floor.rooms.size == 0 %>
+					<tr><td colspan=2 class=vacant><%= link_to('Delete Floor',"/building/delete_floor/#{floor.id}") %></td></tr>
+				<% end %>
 				<% floor.rooms.each do |room|%>
 					<% room_count+=1 %>
 					<td><table>
-						<tr><td class=subheader><%= link_to("#{room.name}", "/roomdetail/search_result/#{room.id}",:class=>'build_component') %>	</td></tr>
+						<tr><td class=vacant><%= link_to("#{room.name}", "/roomdetail/search_result/#{room.id}",:class=>'build_component') %>	</td></tr>
 						<tr><td class=editor>
 							<form action="/building/add_bed">
 								<input type=hidden name=room_id value=<%= room.id %> >
@@ -26,9 +32,12 @@
 							</form>
 							</td>
 						</tr>
+						<% if room.beds.size == 0 %>
+							<tr><td class=vacant><%= link_to('Delete Room',"/building/delete_room/#{room.id}") %></td></tr>
+						<% end %>
 						<% room.beds.each do |bed| %>
 							<% if bed.available_student.nil? && bed.under_notice_student.nil? %>
-								<tr><td class=vacant><%= link_to('Vacant',"/studentdetail/add_new/#{bed.id}") %></td></tr>
+								<tr><td class=vacant><%= link_to('Delete Bed',"/building/delete_bed/#{bed.id}") %></td></tr>
 							<% elsif !bed.under_notice_student.nil? %>
 								<tr><td class=noticed><%= link_to("#{bed.under_notice_student.name}","/studentdetail/detail/#{bed.under_notice_student.id}") %></td></tr>
 							<% else %>
