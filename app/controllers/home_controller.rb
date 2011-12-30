@@ -30,7 +30,7 @@ def index
 			@addresses = Address.search(@location,@street,params[:page])
 			#hostels = Address.find(:all, :conditions => ['city LIKE ? ', '%'+@location+'%']).sort! { |a,b| a.street <=> b.street }
 			#streets = hostels.map(&:street).uniq
-			hostels = Address.find_by_sql("SELECT DISTINCT ucase(trim(street) ) as street FROM addresses where city like '%#{@location}%' ")
+			hostels = Address.find_by_sql("SELECT DISTINCT trim(street)  as street FROM addresses where city like '%#{@location}%' ")
 			streets = hostels.map(&:street).uniq
 			streets = streets.sort! { |a,b| a <=> b }
 			#@options = "<option value=''>All<option>" if params[:area] != ''
