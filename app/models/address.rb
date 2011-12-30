@@ -16,13 +16,13 @@ end
 
 def self.search(location,street,page)
 	paginate :per_page => 20,:page => page,
-        :conditions => ['city LIKE ? and ucase(trim(street)) like ?', '%'+location+'%','%'+street+'%'],
+        :conditions => ['city LIKE ? and trim(street) like ?', '%'+location+'%','%'+street+'%'],
 		:order =>:street
 end
 
 def self.incomplete_search(location,street,page)
 	paginate :per_page => 20,:page => page,
-        :conditions => ['city LIKE ? and ucase(trim(street)) like ? and status is null', '%'+location+'%','%'+street+'%'],
+        :conditions => ['city LIKE ? and trim(street) like ? and status is null', '%'+location+'%','%'+street+'%'],
 		:order =>:street
 end
 end
