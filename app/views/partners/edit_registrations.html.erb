@@ -1,7 +1,8 @@
 <h1>Hostel Details</h1>
 <form action='/hostel/edit_hostel' method=post enctype=multipart/form-data >
 <table class=container>
-
+	<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" >
+	<input type=hidden name=hostel_id value=<%=@hostel.id %> >
 	<% if !flash[:message].nil? %>
 	<tr><td colspan=2 class=column_info><%= flash[:message] %></td></tr>
 	<% end %>
@@ -66,18 +67,39 @@
 			<td class=header_info>Caution Deposite</td>
 			<td>&nbsp;</td>
 		</tr>
+		<input type=hidden name=service_count id=service_count value="<%= @hostel.services.size %>">
+		<%if @hostel.services.size == 0 %>
 		<tr><td colspan=6>
-			<input type=hidden name=service_count id=service_count value="0">
+			
 			<div id=services>
 							<input title="Total number of Beds" type=text name=total0 size=3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<input title="Currently vacant beds number" type=text name=vacant0 size=3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<input title="How many people are sharing the room" type=text name=sharing0 size=3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<input title="Monthly rent amount" type=text name=rent0 size=3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<input title="Caution money to take room." type=text name=deposite0 size=3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<img title="Add more Room types" src='../images/add.jpg' id=add_service style="width:30px;height:30px" />
+							<img title="Add more Room types" src='../../images/add.jpg' class=add_service style="width:30px;height:30px" />
 			</div>
 			</td>
 		</tr>
+		<% end %>
+		<% service_counter = 0 %>
+		<% @hostel.services.each do |service| %>
+		<tr><td colspan=6>
+			
+			<div id=services>
+							<input title="Total number of Beds" type=text name='total<%=service_counter%>' size=3 value='<%=service.total_seats %>' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input title="Currently vacant beds number" type=text name='vacant<%=service_counter%>' value='<%=service.vacant_seats %>' size=3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input title="How many people are sharing the room" type=text name='sharing<%=service_counter%>' size=3 value='<%=service.sharing %>' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input title="Monthly rent amount" type=text name='rent<%=service_counter%>' size=3 value='<%=service.rent_amount %>' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input title="Caution money to take room." type=text name='deposite<%=service_counter%>' size=3 value='<%=service.caution_deposite %>' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<% if service_counter == 0 %>
+							<img title="Add more Room types" src='../../images/add.jpg' class=add_service style="width:30px;height:30px" />
+							<% end %>
+			</div>
+			<% service_counter += 1 %>
+			</td>
+		</tr>
+		<% end %>
 		</table>
 	</td>
 	</tr>
@@ -99,8 +121,8 @@
 $(document).ready(function() {
     $('form:second *:input[type=text]:first').focus();
 });
-	i = 0 ;
-$('#add_service').click(function(){
+	i = <%= @hostel.services.size %> ;
+$('.add_service').click(function(){
 	i += 1;
 	$('#services').append('<br><br><input title="Total number of Beds" type=text name=total"+i+" size=3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input title="Currently vacant beds number" type=text name=vacant"+i+" size=3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input title="How many people are sharing the room" type=text name=sharing"+i+" size=3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input title="Caution money to take room." type=text name=rent"+i+" size=3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input title="Caution money to take room." type=text name=deposite"+i+" size=3>');
 	$('#service_count').attr('value',i);
